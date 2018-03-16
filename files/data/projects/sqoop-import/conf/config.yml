@@ -1,0 +1,96 @@
+scripts_source: "/scripts/$database/extrator/$table"
+hdfs_api: "http://localhost:14000"
+impala_deamon: "localhost"
+impala_shell: "/usr/bin/impala-shell"
+sqoop_home: "/usr/bin/sqoop"
+
+orfm:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr1.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr2.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr3.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr4.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr5.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr6.b2w)(PORT=1524)))(FAILOVER=ON)(LOAD_BALANCE=ON)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWRMSPR))(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+        
+orms:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr1.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr2.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr3.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr4.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr5.b2w)(PORT=1524))(ADDRESS=(PROTOCOL=TCP)(HOST=dbrmspr6.b2w)(PORT=1524)))(FAILOVER=ON)(LOAD_BALANCE=ON)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWRMSPR))(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+umbrella:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=ex01dbadm01.b2w)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=ex01dbadm02.b2w)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWFPPR)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=1)(DELAY=5))))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+  
+utm:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbutm-scan1.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWUTMPR)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+  
+wms:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=dbwmspr1.b2w)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ACERPR03.americanas.com.br)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+reversa:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=dbwmspr1.b2w)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ACERPR03.americanas.com.br)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+bob:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=exbobgt-scan.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWBOBPR)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO" 
+
+bob2:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=exbobgt-scan.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWBOBPR)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+om:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbebspr1.b2w)(PORT=1577))(ADDRESS=(PROTOCOL=TCP)(HOST=dbebspr2.b2w)(PORT=1577))(ADDRESS=(PROTOCOL=TCP)(HOST=dbebspr3.b2w)(PORT=1577))(ADDRESS=(PROTOCOL=TCP)(HOST=dbebspr4.b2w)(PORT=1577))(ADDRESS=(PROTOCOL=TCP)(HOST=dbebspr5.b2w)(PORT=1577))(ADDRESS=(PROTOCOL=TCP)(HOST=dbebspr6.b2w)(PORT=1577))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWEBSPR)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+planck:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbpkhm-scan.back.b2w)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=BWPKHMGL)))"
+  username: "PLANCK"
+  password: "Planck"
+
+rdw:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=dbrdwpr-scan.back.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BI_BIGDATA)))"
+  username: "apptarkena"
+  password: "apptarkena"
+
+billing:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr1.b2w)(PORT=1522))(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr2.b2w)(PORT=1522))(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr3.b2w)(PORT=1522))(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr4.b2w)(PORT=1522))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWMDPR)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+mailing:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=scan-prdglt1.back.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWMLPR_GLETE)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+bhd:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbbhdpr-scan.back.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=svc_bhd)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+risco:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=exrskgt-scan.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWRSKPR)))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+kista:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=dbkistapr1.b2w)(PORT=1523))(ADDRESS=(PROTOCOL=TCP)(HOST=dbkistapr2.b2w)(PORT=1523)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWKSTPR)(FAILOVER_MODE=(TYPE=SELECT)(METHOD= BASIC)(RETRIES=180)(DELAY=5))))"
+  username: "US_QLIK_QLIKVIEW"
+  password: "QLIK"
+
+mid:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr1.b2w)(PORT=1522))(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr2.b2w)(PORT=1522))(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr3.b2w)(PORT=1522))(ADDRESS=(PROTOCOL=TCP)(HOST=dbmidpr4.b2w)(PORT=1522))(LOAD_BALANCE=yes)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BWMDPR)(FAILOVER_MODE=(TYPE=SELECT)(METHOD=BASIC)(RETRIES=180)(DELAY=5))))"
+  username: "TI_OBI_ICO"
+  password: "B2W!2013OBIICO"
+
+bi:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=dbrdwpr-scan.back.b2w)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=BI_BIGDATA)))"
+  username: "apptarkena"
+  password: "apptarkena"
+

@@ -1,0 +1,57 @@
+table: "umbrella.inst_retorno"
+
+load_type: "incremental_partitioned"
+
+split_by: "inre_id_instancia"
+
+columns: "SELECT  inre.inre_id_instancia
+                , inre.inre_tp_estado
+                , inre.inre_dh_ultalt
+                , inre.inre_usuario
+                , inre.inre_id_cia
+                , inre.inre_id_filial
+                , inre.inre_in_nfe_emitida
+                , inre.inre_id_cliente
+                , inre.inre_id_transp
+                , inre.inre_id_contrato
+                , inre.inre_nu_rast_transp
+                , inre.inre_dt_coleta_prometida
+                , inre.inre_dt_retorno_prometida
+                , inre.inre_dt_coleta
+                , inre.inre_dt_coleta_prevista
+                , inre.inre_dt_retorno_prevista
+                , inre.inre_dt_max_postagem
+                , inre.inre_tp_retorno
+                , inre.inre_id_nf
+                , inre.inre_pz_coleta
+                , inre.inre_pz_retorno
+                , inre.inre_transp_nome
+                , inre.inre_transp_ie
+                , inre.inre_transp_end
+                , inre.inre_transp_muni
+                , inre.inre_transp_uf
+                , inre.inre_peso_bruto
+                , inre.inre_volume
+                , inre.inre_altura
+                , inre.inre_largura
+                , inre.inre_comprimento
+                , inre.inre_vl_total_orig
+                , inre.inre_id_nf || '_' || inre.inre_id_filial || '_' || inre_id_cia as key_inst_retorno
+                , inst.inst_dh_abertura as data_inclusao_c
+                , sysdate as data_carga
+                , to_char(inst.inst_dh_abertura,'RRRR-MM') as data_inclusao_p
+ 
+        FROM umbrella.instancia inst
+        , umbrella.inst_retorno inre"
+
+where_inc: "WHERE inst.inst_id_instancia = inre.inre_id_instancia
+        AND inst.inst_dh_ultalt >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"
+
+where_full: "WHERE inst.inst_id_instancia = inre.inre_id_instancia
+        and $CONDITIONS"
+
+where_range: "WHERE inst.inst_id_instancia = inre.inre_id_instancia
+        AND inst.inst_dh_ultalt >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+        AND inst.inst_dh_ultalt >= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"

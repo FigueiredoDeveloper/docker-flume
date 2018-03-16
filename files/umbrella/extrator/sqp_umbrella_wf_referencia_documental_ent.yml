@@ -1,0 +1,52 @@
+table: "umbrella.wf_referencia_documental"
+
+split_by: "sr.sref_id_doc"
+
+load_type: "incremental_partitioned"
+
+columns: "select  sr.sref_id_refdoc
+                , sr.sref_id_cia
+                , sr.sref_id_fonte_ult
+                , sr.sref_id_ponto_ult
+                , sr.sref_dt_rastr_ult
+                , sr.sref_dt_prev_acum_ult
+                , sr.sref_id_refdoc_pai
+                , sr.sref_situacao
+                , sr.sref_usuario
+                , sr.sref_datahora
+                , sr.sref_dt_prev_ult
+                , sr.sref_id_fonte_ant
+                , sr.sref_id_ponto_ant
+                , sr.sref_tp_refdoc
+                , sr.sref_id_filial
+                , sr.sref_tp_venda
+                , sr.sref_id_unineg
+                , sr.sref_id_doc
+                , sr.sref_id_canal_venda
+                , sr.sref_id_transp
+                , sr.sref_id_loja
+                , sr.sref_id_doc as key_wf_referencia_documental_ent
+                , ix.inst_dh_abertura as data_inclusao
+                , sysdate as data_carga
+                , to_char(ix.inst_dh_abertura,'RRRR-MM') as data_inclusao_p
+
+        from umbrella.instancia ix
+        , umbrella.wf_referencia_documental sr"
+
+where_inc: "where sr.sref_id_cia = ix.inst_id_cia
+        and sr.sref_id_doc = ix.inst_id_instancia
+        and sr.sref_tp_refdoc = 'ENT'
+        and sr.sref_datahora >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"
+
+where_full: "where sr.sref_id_cia = ix.inst_id_cia
+        and sr.sref_id_doc = ix.inst_id_instancia
+        and sr.sref_tp_refdoc = 'ENT'
+        and $CONDITIONS"
+
+where_range: "where sr.sref_id_cia = ix.inst_id_cia
+        and sr.sref_id_doc = ix.inst_id_instancia
+        and sr.sref_tp_refdoc = 'ENT'
+        and sr.sref_datahora  >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+        and sr.sref_datahora  <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"

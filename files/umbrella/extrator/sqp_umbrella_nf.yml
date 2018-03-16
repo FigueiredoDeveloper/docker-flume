@@ -1,0 +1,262 @@
+split_by: "nc.nfca_id_nf"
+columns: "  select nd.nfde_id_nf ||'_'|| nd.nfde_num_item 
+                                 ||'_'|| nd.nfde_id_filial 
+                                 ||'_'|| nd.nfde_id_cia     key_nf,
+                   nc.nfca_datahora_reg                     data_registro,
+                   nc.nfca_id_filial                        filial,
+                   nc.nfca_num_nota                         nf,
+                   nc.nfca_serie                            serie,
+                   nc.nfca_id_natope                        cfop_nf,
+                   nc.nfca_seq_natope                       cfop_seq_nf,
+                   cfc.cfoc_nome                            cfop_descricao_nf,
+                   bgc.bgmc_modulo_bage                     modulo_gerencial_nf,
+                   nc.nfca_id_tipope                        tipo_operacao,
+                   tpo.ctop_nome                            operacao,
+                   nc.nfca_dt_emissao                       data_emissao,
+                   nc.nfca_in_es                            entrada_saida,
+                   nc.nfca_dt_es                            data_entrada_saida,
+                   nc.nfca_id_depos                         sub_inventario,
+                   clf.nfce_insest                          ie_fat,
+                   nc.nfca_id_cliente_fat                   cnpj_cpf_cliente_fatura,
+                   clf.nfce_nome                            nome_cliente_fatura,
+                   clf.nfce_id_estado                       uf_cliente_fatura,
+                   nc.nfca_id_cliente_ent                   cnpj_cpf_cliente_entrega,
+                   cle.nfce_nome                            nome_cliente_entrega,
+                   cle.nfce_id_estado                       uf_cliente_entrega,
+                   nc.nfca_id_unineg                        codigo_unidade_negocio,
+                   un.unin_nome                             unidade_negocio,
+                   nc.nfca_id_canal                         codigo_canal_venda,
+                   cv.cave_nome                             canal_venda,                                         
+                   nc.nfca_ped_cliente                      entrega,  
+                   nc.nfca_id_marca                         codigo_marca,
+                   mc.marc_nome                             marca,
+                   nc.nfca_id_contrato_b2b                  contrato_b2b,     
+                   nc.nfca_situacao                         situacao,
+                   nd.nfde_id_item                          sku,
+                   ig.iteg_nome                             descricao_sku,
+                   ig.iteg_id_depto                         codigo_depto,
+                   dp.depa_nome                             departamento,
+                   nd.nfde_id_natope                        cfop_item_nf,
+                   nd.nfde_seq_natope                       cfop_seq_item_nf,
+                   cfd.cfoc_nome                            cfop_descricao_item_nf,
+                   bgd.bgmc_modulo_bage                     modulo_gerencial_item_nf,
+                   nc.nfca_vl_total_nota                    valor_total_nf,
+                   nd.nfde_qt_fat                           qt_fat,
+                   nd.nfde_pr_unit                          preco_unitario,
+                   nd.nfde_perc_icms                        perc_icms,
+                   nd.nfde_base_icms                        base_icms,
+                   nd.nfde_vl_icms                          valor_icms,
+                   nd.nfde_perc_icms_sub                    perc_icms_st,
+                   nd.nfde_base_icms_sub                    base_icms_st,
+                   nd.nfde_vl_icms_sub                      valor_icms_st,
+                   nd.nfde_base_icms_sub_nred               base_reduzida_icms_st,
+                   nd.nfde_vl_icms_dest                     valor_icms_destino,
+                   nd.nfde_vl_icms_sub_dest                 valor_icms_st_destino,
+                   nd.nfde_vl_icms_suf                      valor_icms_suframa,
+                   nd.nfde_id_nbm                           ncm,
+                   nd.nfde_seq_nbm                          ncm_seq,
+                   nd.nfde_perc_ipi                         perc_ipi,
+                   nd.nfde_base_ipi                         base_ipi,
+                   nd.nfde_vl_ipi                           valor_ipi,
+                   nd.nfde_vl_ipi_dest                      valor_ipi_destino,
+                   nd.nfde_vl_mercadoria                    valor_mercadoria,
+                   nd.nfde_vl_frete                         valor_frete,
+                   nd.nfde_vl_seguro                        valor_seguro,
+                   nd.nfde_vl_despesa                       valor_despesa,
+                   nd.nfde_vl_ii                            valor_ii,
+                   nd.nfde_vl_desconto                      valor_desconto,
+                   nd.nfde_vl_total_item                    valor_total_item,
+                   nd.nfde_vl_comissao                      valor_comissao,
+                   nd.nfde_vl_comissao2                     valor_comissao2,
+                   nd.nfde_vl_servico                       valor_servico,
+                   nd.nfde_vl_servico_tot                   valor_servico_total,
+                   nd.nfde_vl_irrf                          valor_irrf,
+                   nd.nfde_vl_iss                           valor_iss,
+                   nd.nfde_vl_desp_financ                   valor_desp_financeira,
+                   nd.nfde_vl_tarifa                        valor_tarifa,
+                   nd.nfde_vl_pis                           valor_pis,
+                   nd.nfde_base_icms_nred                   base_icms_reduzida,
+                   nd.nfde_vl_icms_merc                     valor_icms_merc,
+                   nd.nfde_vl_icms_frete                    valor_icms_frete,
+                   nd.nfde_vl_icms_outros                   valor_icms_outros,
+                   nd.nfde_vl_cofins                        valor_cofins,
+                   nd.nfde_vl_cofins_merc                   valor_cofins_merc,
+                   nd.nfde_vl_cofins_frete                  valor_cofins_frete,
+                   nd.nfde_vl_cofins_outros                 valor_cofins_outros,
+                   nd.nfde_vl_pis_merc                      valor_pis_merc,
+                   nd.nfde_vl_pis_frete                     valor_pis_frete,
+                   nd.nfde_vl_pis_outros                    valor_pis_outros,
+                   nd.nfde_perc_pis                         perc_pis,
+                   nd.nfde_perc_cofins                      perc_cofins,
+                   nd.nfde_perc_csll                        perc_csll,
+                   nd.nfde_vl_csll                          valor_csll,
+                   nd.nfde_vl_csll_merc                     valor_csll_merc,
+                   nd.nfde_vl_csll_frete                    valor_csll_frete,
+                   nd.nfde_vl_csll_outros                   valor_csll_outros,
+                   nd.nfde_vl_desconto_cond                 desconto_condicional,
+                   nd.nfde_vl_desconto_inc                  desconto_incondicional,
+                   nd.nfde_base_ipi_dest                    base_ipi_destino,
+                   nd.nfde_base_icms_dest                   base_icms_destino,
+                   nd.nfde_base_icms_sub_dest               base_icms_st_destino,
+                   nd.nfde_base_ii                          base_ii,
+                   nd.nfde_vl_desp_aduaneiro                valor_despesa_aduaneiro,
+                   nd.nfde_vl_adicional                     valor_adicional,
+                   nd.nfde_vl_pis_imp                       valor_pis_importacao,
+                   nd.nfde_vl_cofins_imp                    valor_cofins_importacao,
+                   nd.nfde_vl_cif                           valor_cif,
+                   nd.nfde_perc_icms_dest                   perc_icms_destino,
+                   nd.nfde_perc_irrf                        perc_irrf,
+                   nd.nfde_perc_iss                         perc_iss,
+                   nd.nfde_perc_red_icms                    perc_reducao_icms,
+                   nd.nfde_perc_red_icms_sub                perc_reducao_icms_st,
+                   nd.nfde_perc_icms_fecp                   perc_icms_fecp,
+                   nd.nfde_perc_icms_destin                 perc_icms_destin,
+                   nd.nfde_perc_icms_fecp_destin            perc_icms_fecp_destin,
+                   nd.nfde_perc_red_icms_destin             perc_reducao_icms_destin,
+                   nd.nfde_base_icms_nred_destin            base_icms_reduzida_destin,
+                   nd.nfde_base_icms_destin                 base_icms_destin,
+                   nd.nfde_vl_icms_destin                   valor_icms_destin,
+                   nd.nfde_perc_icms_destin_part            perc_icms_destin_part,
+                   nd.nfde_vl_icms_part_dest                valor_icms_part_dest,
+                   nd.nfde_vl_icms_part_rem                 valor_icms_part_rem,
+                   nd.nfde_in_pauta_ipi                     pauta_ipi,
+                   nd.nfde_in_pauta_st                      pauto_st,
+                   nd.nfde_vl_icms_fecp_destin              valor_icms_fecp_destin,
+                   nd.nfde_perc_icms_dest_interna           perc_icms_dest_interna,
+                   nd.nfde_vl_icms_part_dest_merc           valor_icms_part_dest_merc,
+                   nd.nfde_vl_icms_part_dest_frete          valor_icms_part_dest_frete,
+                   nd.nfde_vl_icms_part_dest_outros         valor_icms_part_dest_outros,
+                   nd.nfde_vl_icms_part_rem_merc            valor_icms_part_rem_merc,
+                   nd.nfde_vl_icms_part_rem_frete           valor_icms_part_rem_frete,
+                   nd.nfde_vl_icms_part_rem_outros          valor_icms_part_rem_outros,
+                   nd.nfde_vl_icms_fecp_dest_merc           valor_icms_fecp_dest_merc,
+                   nd.nfde_vl_icms_fecp_dest_frete          valor_icms_fecp_dest_frete,
+                   nd.nfde_vl_icms_fecp_dest_outros         valor_icms_fecp_dest_outros,
+                   sysdate                                  data_carga,
+                   to_char(nc.nfca_datahora_reg,'rrrr-mm')  data_registro_p
+              from umbrella.nota_fiscal_cabecalho           nc,
+                   umbrella.nota_fiscal_detalhe             nd,
+                   umbrella.cfoc                            cfc, 
+                   umbrella.base_gerencial_modulo_cfo       bgc,
+                   umbrella.cfoc                            cfd, 
+                   umbrella.base_gerencial_modulo_cfo       bgd,
+                   umbrella.cfo_tipo_operacao               tpo,
+                   umbrella.nfca_cliente                    clf,
+                   umbrella.nfca_cliente                    cle,
+                   umbrella.unidade_de_negocios             un,
+                   umbrella.canal_de_venda                  cv,
+                   umbrella.marca                           mc,
+                   umbrella.item_geral                      ig,
+                   umbrella.departamento                    dp "
+where_inc:   " where nc.nfca_id_cia           = 1
+                 and nc.nfca_id_cia           = nd.nfde_id_cia
+                 and nc.nfca_id_nf            = nd.nfde_id_nf
+                 and nc.nfca_id_cia           = cfc.cfoc_id_cia
+                 and nc.nfca_id_natope        = cfc.cfoc_id_natope
+                 and nc.nfca_seq_natope       = cfc.cfoc_seq
+                 and nc.nfca_id_cia           = bgc.bgmc_id_cia 
+                 and nc.nfca_id_natope        = bgc.bgmc_id_natope
+                 and nc.nfca_seq_natope       = bgc.bgmc_seq_natope
+                 and nc.nfca_id_tipope        = tpo.ctop_id_tipope
+                 and nd.nfde_id_cia           = cfd.cfoc_id_cia
+                 and nd.nfde_id_natope        = cfd.cfoc_id_natope
+                 and nd.nfde_seq_natope       = cfd.cfoc_seq
+                 and nd.nfde_id_cia           = bgd.bgmc_id_cia 
+                 and nd.nfde_id_natope        = bgd.bgmc_id_natope
+                 and nd.nfde_seq_natope       = bgd.bgmc_seq_natope
+                 and nc.nfca_id_cia           = clf.nfce_id_cia
+                 and nc.nfca_id_nf            = clf.nfce_id_nf
+                 and nc.nfca_id_filial        = clf.nfce_id_filial
+                 and nc.nfca_id_cliente_fat   = clf.nfce_id_terceiro
+                 and clf.nfce_in_tipo         = 'F'
+                 and nc.nfca_id_cia           = cle.nfce_id_cia
+                 and nc.nfca_id_nf            = cle.nfce_id_nf
+                 and nc.nfca_id_filial        = cle.nfce_id_filial
+                 and nc.nfca_id_cliente_ent   = cle.nfce_id_terceiro
+                 and cle.nfce_in_tipo         = 'E'
+                 and nc.nfca_id_cia           = un.unin_id_cia
+                 and nc.nfca_id_unineg        = un.unin_id_unineg
+                 and nc.nfca_id_canal         = cv.cave_id_canal
+                 and nc.nfca_id_cia           = mc.marc_id_cia
+                 and nc.nfca_id_marca         = mc.marc_id_marca
+                 and nd.nfde_id_cia           = ig.iteg_id_cia
+                 and nd.nfde_id_item          = ig.iteg_id    
+                 and ig.iteg_id_cia           = dp.depa_id_cia
+                 and ig.iteg_id_depto         = dp.depa_id_depto 
+                 and nc.nfca_dt_situacao     >= to_date('$max_data_carga','DD/MM/RRRR hh24:mi:ss')
+                 and $CONDITIONS "
+where_full:  " where nc.nfca_id_cia           = 1
+                 and nc.nfca_id_cia           = nd.nfde_id_cia
+                 and nc.nfca_id_nf            = nd.nfde_id_nf
+                 and nc.nfca_id_cia           = cfc.cfoc_id_cia
+                 and nc.nfca_id_natope        = cfc.cfoc_id_natope
+                 and nc.nfca_seq_natope       = cfc.cfoc_seq
+                 and nc.nfca_id_cia           = bgc.bgmc_id_cia 
+                 and nc.nfca_id_natope        = bgc.bgmc_id_natope
+                 and nc.nfca_seq_natope       = bgc.bgmc_seq_natope
+                 and nc.nfca_id_tipope        = tpo.ctop_id_tipope
+                 and nd.nfde_id_cia           = cfd.cfoc_id_cia
+                 and nd.nfde_id_natope        = cfd.cfoc_id_natope
+                 and nd.nfde_seq_natope       = cfd.cfoc_seq
+                 and nd.nfde_id_cia           = bgd.bgmc_id_cia 
+                 and nd.nfde_id_natope        = bgd.bgmc_id_natope
+                 and nd.nfde_seq_natope       = bgd.bgmc_seq_natope
+                 and nc.nfca_id_cia           = clf.nfce_id_cia
+                 and nc.nfca_id_nf            = clf.nfce_id_nf
+                 and nc.nfca_id_filial        = clf.nfce_id_filial
+                 and nc.nfca_id_cliente_fat   = clf.nfce_id_terceiro
+                 and clf.nfce_in_tipo         = 'F'
+                 and nc.nfca_id_cia           = cle.nfce_id_cia
+                 and nc.nfca_id_nf            = cle.nfce_id_nf
+                 and nc.nfca_id_filial        = cle.nfce_id_filial
+                 and nc.nfca_id_cliente_ent   = cle.nfce_id_terceiro
+                 and cle.nfce_in_tipo         = 'E'
+                 and nc.nfca_id_cia           = un.unin_id_cia
+                 and nc.nfca_id_unineg        = un.unin_id_unineg
+                 and nc.nfca_id_canal         = cv.cave_id_canal
+                 and nc.nfca_id_cia           = mc.marc_id_cia
+                 and nc.nfca_id_marca         = mc.marc_id_marca
+                 and nd.nfde_id_cia           = ig.iteg_id_cia
+                 and nd.nfde_id_item          = ig.iteg_id    
+                 and ig.iteg_id_cia           = dp.depa_id_cia
+                 and ig.iteg_id_depto         = dp.depa_id_depto 
+                 and $CONDITIONS "
+where_range: " where nc.nfca_id_cia           = 1
+                 and nc.nfca_id_cia           = nd.nfde_id_cia
+                 and nc.nfca_id_nf            = nd.nfde_id_nf
+                 and nc.nfca_id_cia           = cfc.cfoc_id_cia
+                 and nc.nfca_id_natope        = cfc.cfoc_id_natope
+                 and nc.nfca_seq_natope       = cfc.cfoc_seq
+                 and nc.nfca_id_cia           = bgc.bgmc_id_cia 
+                 and nc.nfca_id_natope        = bgc.bgmc_id_natope
+                 and nc.nfca_seq_natope       = bgc.bgmc_seq_natope
+                 and nc.nfca_id_tipope        = tpo.ctop_id_tipope
+                 and nd.nfde_id_cia           = cfd.cfoc_id_cia
+                 and nd.nfde_id_natope        = cfd.cfoc_id_natope
+                 and nd.nfde_seq_natope       = cfd.cfoc_seq
+                 and nd.nfde_id_cia           = bgd.bgmc_id_cia 
+                 and nd.nfde_id_natope        = bgd.bgmc_id_natope
+                 and nd.nfde_seq_natope       = bgd.bgmc_seq_natope
+                 and nc.nfca_id_cia           = clf.nfce_id_cia
+                 and nc.nfca_id_nf            = clf.nfce_id_nf
+                 and nc.nfca_id_filial        = clf.nfce_id_filial
+                 and nc.nfca_id_cliente_fat   = clf.nfce_id_terceiro
+                 and clf.nfce_in_tipo         = 'F'
+                 and nc.nfca_id_cia           = cle.nfce_id_cia
+                 and nc.nfca_id_nf            = cle.nfce_id_nf
+                 and nc.nfca_id_filial        = cle.nfce_id_filial
+                 and nc.nfca_id_cliente_ent   = cle.nfce_id_terceiro
+                 and cle.nfce_in_tipo         = 'E'
+                 and nc.nfca_id_cia           = un.unin_id_cia
+                 and nc.nfca_id_unineg        = un.unin_id_unineg
+                 and nc.nfca_id_canal         = cv.cave_id_canal
+                 and nc.nfca_id_cia           = mc.marc_id_cia
+                 and nc.nfca_id_marca         = mc.marc_id_marca
+                 and nd.nfde_id_cia           = ig.iteg_id_cia
+                 and nd.nfde_id_item          = ig.iteg_id    
+                 and ig.iteg_id_cia           = dp.depa_id_cia
+                 and ig.iteg_id_depto         = dp.depa_id_depto 
+                 and nc.nfca_dt_situacao     >= to_date('$data_inicial','DD/MM/RRRR hh24:mi:ss')
+                 and nc.nfca_dt_situacao     <= to_date('$data_final','DD/MM/RRRR hh24:mi:ss')                 
+                 and $CONDITIONS "
+

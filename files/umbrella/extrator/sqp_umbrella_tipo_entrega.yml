@@ -1,0 +1,27 @@
+# full no Qlik
+
+table: "umbrella.tipo_entrega"
+
+load_type: "full"
+
+split_by: "tien_id_tp_entrega"
+
+columns: "select  tien_id_tp_entrega
+                , tien_nome
+                , tien_etiqueta
+                , tien_in_padrao
+                , tien_in_tipo
+                , tien_pz_atraso
+                , tien_usuario
+                , tien_datahora
+                , tien_cod_externo
+                , tien_hr_corte
+                , sysdate as data_carga
+
+        from umbrella.tipo_entrega"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"

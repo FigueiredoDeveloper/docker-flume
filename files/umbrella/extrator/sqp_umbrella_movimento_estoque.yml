@@ -1,0 +1,50 @@
+table: "umbrella.movimento_estoque"
+
+load_type: "incremental_partitioned"
+
+split_by: "moes_id_movimento"
+
+columns: "select  moes_id_movimento
+                , moes_id_cia
+                , moes_id_filial
+                , moes_id_depos
+                , moes_id_item
+                , moes_id_local
+                , moes_id_refdoc
+                , moes_id_lote
+                , moes_dt_movimento
+                , moes_qt_movimento
+                , moes_vl_movimento
+                , moes_vl_movimento_us
+                , moes_in_sentido
+                , moes_in_romaneio
+                , moes_id_logica
+                , moes_id_modulo
+                , moes_id_documento
+                , moes_doc_numero
+                , moes_id_movimento_pai
+                , moes_usuario
+                , moes_datahora
+                , moes_in_contabilizado
+                , moes_nu_lote
+                , moes_obs
+                , moes_doc_num_item
+                , moes_vl_agrup
+                , moes_id_agrup_valor
+                , moes_id_tipdep
+
+                , moes_id_movimento as key_movimento_estoque
+                , moes_datahora as data_inclusao_c
+                , sysdate as data_carga
+                , to_char(moes_datahora,'RRRR-MM') as data_inclusao_p
+	  from umbrella.movimento_estoque"
+
+where_inc: "where moes_datahora  >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+              and $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where moes_datahora  >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+              and moes_datahora  <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+              and $CONDITIONS"
+

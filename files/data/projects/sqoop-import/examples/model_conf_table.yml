@@ -1,0 +1,14 @@
+table: "schema.table"
+split_by: "column int"
+inc: "T or F"
+columns: "query"
+key: "key unique in table"
+
+where_inc: "WHERE $CONDITIONS and LAST_UPDATE_DATE >= to_date('$max_data_carga','DD/MM/YYYY hh24:mi:ss')"
+
+where_full: "WHERE $CONDITIONS"
+
+where_range: "WHERE LAST_UPDATE_DATE >= to_date('$data_inicial','DD/MM/YYYY hh24:mi:ss')
+                    and LAST_UPDATE_DATE <= to_date('$data_final','DD/MM/YYYY hh24:mi:ss')
+                    and  $CONDITIONS"
+

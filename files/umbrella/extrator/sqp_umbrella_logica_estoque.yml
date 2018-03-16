@@ -1,0 +1,31 @@
+# full no Qlik
+
+table: "umbrella.logica_estoque"
+
+load_type: "full"
+
+split_by: "loge_id_logica"
+
+columns: "select loge_id_logica
+                , loge_nome
+                , loge_id_operacao
+                , loge_in_reposicao
+                , loge_in_consumo
+                , loge_in_previsao
+                , loge_in_manual
+                , loge_in_estorno
+                , loge_id_subsequente
+                , loge_id_estorno
+                , loge_usuario
+                , loge_datahora
+                , loge_in_inventario
+                , loge_situacao
+                , sysdate as data_carga
+        from umbrella.logica_estoque"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"
+

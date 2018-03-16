@@ -1,0 +1,28 @@
+# importacao full no Qlik
+
+table: "umbrella.valorizacao_estoque"
+
+load_type: "full"
+
+split_by: "vest_id_item"
+
+columns: "select  vest_id_cia
+                , vest_id_filial
+                , vest_id_agrup_valor
+                , vest_id_item
+                , vest_aamm
+                , vest_tp_propriedade
+                , vest_vl
+                , vest_vl_pm
+                , vest_vl_pm_ant
+                , vest_usuario
+                , vest_datahora
+                , sysdate as data_carga
+        from umbrella.valorizacao_estoque"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"
+

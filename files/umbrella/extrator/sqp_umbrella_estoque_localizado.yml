@@ -1,0 +1,31 @@
+# full no Qlik
+
+table: "umbrella.estoque_localizado"
+
+load_type: "full"
+
+split_by: "eloc_id_filial"
+
+columns: "select  eloc_id_cia
+                , eloc_id_filial
+                , eloc_id_depos
+                , eloc_id_item
+                , eloc_id_local
+                , eloc_id_refdoc
+                , eloc_id_lote
+                , eloc_dt_ultima_entrada
+                , eloc_qt_fisica
+                , eloc_qt_romaneada
+                , eloc_dt_ult_alt
+                , sysdate as data_carga
+
+from umbrella.estoque_localizado"
+
+where_inc: "where eloc_qt_fisica > 0
+                and $CONDITIONS"
+
+where_full: "where eloc_qt_fisica > 0
+                and $CONDITIONS"
+
+where_range: "where eloc_qt_fisica > 0
+                and $CONDITIONS"

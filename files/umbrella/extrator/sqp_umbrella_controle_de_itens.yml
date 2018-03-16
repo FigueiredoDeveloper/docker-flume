@@ -1,0 +1,41 @@
+# full no Qlik
+
+table: "umbrella.controle_de_itens"
+
+load_type: "full"
+
+split_by: "coni_id_conite"
+
+columns: "select  
+  coni_id_cia
+, coni_id_conite
+, coni_nome
+, coni_in_estoque
+, coni_in_qualidade
+, coni_in_lote
+, coni_in_desclivre
+, coni_in_ped_compra
+, coni_in_ped_venda
+, coni_in_ipi
+, coni_in_vendido
+, coni_in_comprado
+, coni_in_servico
+, coni_usuario
+, coni_dt_ult_alt
+, coni_in_produzido
+, coni_in_brinde
+, coni_in_geral
+, coni_in_virtual
+, coni_in_kit
+, coni_in_comp_kit
+, coni_id_tp_liq_ped
+, coni_situacao
+, sysdate as data_carga
+from umbrella.controle_de_itens
+"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"

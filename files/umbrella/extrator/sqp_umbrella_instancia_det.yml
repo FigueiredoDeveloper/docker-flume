@@ -1,0 +1,60 @@
+table: "umbrella.instancia_det"
+
+load_type: "incremental_partitioned"
+
+split_by: "inde_id_instancia"
+
+columns: "select  b.inde_id_instancia
+                , b.inde_id_cia
+                , b.inde_id_filial
+                , b.inde_id_pedido
+                , b.inde_id_item
+                , b.inde_qt
+                , b.inde_qt_kg
+                , b.inde_pr_unit
+                , b.inde_vl_total
+                , b.inde_in_complementar
+                , b.inde_vl_merc
+                , b.inde_vl_desc_cond_unit
+                , b.inde_vl_desc_inc_unit
+                , b.inde_vl_frete
+                , b.inde_vl_desp_financ
+                , b.inde_vl_desp_aces
+                , b.inde_id_item_orig
+                , b.inde_cod_estab_est
+                , b.inde_dt_est_disp
+                , b.inde_id_item_pai
+                , b.inde_pz_disp
+                , b.inde_pz_cd
+                , b.inde_pz_transit
+                , b.inde_cod_estab_saida
+                , b.inde_tp_estado
+                , b.inde_num_item_ped
+                , b.inde_ped_cliente
+                , b.inde_id_ext1_exp
+                , b.inde_id_ext2_exp
+                , b.inde_id_ext3_exp
+                , b.inde_id_ext1_est
+                , b.inde_id_ext2_est
+                , b.inde_id_ext3_est
+                , b.inde_id_contr_transp
+                , b.inde_tipo
+
+                , b.inde_id_instancia||'_'||b.inde_id_item as key_instancia_det
+                , a.inst_dh_abertura as data_inclusao_c
+                , sysdate as data_carga
+                , to_char(a.inst_dh_abertura,'RRRR-MM') as data_inclusao_p
+
+        from umbrella.instancia a
+        , umbrella.instancia_det b"
+
+where_inc: "where a.inst_id_instancia = b.inde_id_instancia
+        and a.inst_dh_ultalt >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"
+
+where_full: "where a.inst_id_instancia = b.inde_id_instancia and $CONDITIONS"
+
+where_range: "where a.inst_id_instancia = b.inde_id_instancia
+        and a.inst_dh_ultalt >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+        and a.inst_dh_ultalt <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"

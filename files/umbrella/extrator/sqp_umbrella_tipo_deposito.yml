@@ -1,0 +1,41 @@
+# full no Qlik
+
+table: "umbrella.tipo_deposito"
+
+load_type: "full"
+
+split_by: "tide_id_tipdep"
+
+columns: "select  tide_id_tipdep
+                , tide_nome
+                , tide_in_unico
+                , tide_tp_propriedade
+                , tide_tp_posse
+                , tide_in_expedicao
+                , tide_in_reserva
+                , tide_in_disponivel
+                , tide_in_romaneia
+                , tide_in_inventario
+                , tide_in_refdoc
+                , tide_usuario
+                , tide_datahora
+                , tide_id_tipdep_wms
+                , tide_in_transitorio
+                , tide_id_agrup_valor
+                , tide_in_wms
+                , tide_tp_padrao
+                , tide_in_recalc_pz
+                , tide_in_req_kit
+                , tide_in_req_aes
+                , tide_in_arquivo_zera
+                , tide_in_canc_req_res
+                , tide_in_canc_req_este
+                , sysdate as data_carga
+        from umbrella.tipo_deposito"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"
+

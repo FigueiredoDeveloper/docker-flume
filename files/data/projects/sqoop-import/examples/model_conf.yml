@@ -1,0 +1,18 @@
+scripts_source: "/$database/$table"
+hdfs_api: "path to hdfs"
+impala_deamon: "path to impala deamon"
+impala_shell: "path to impala shell"
+sqoop_home: "path to sqoop"
+
+cnx1:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST="")(PORT=""))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME="")))"
+  username: ""
+  password: ""
+
+
+cnx2:
+  connect: "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST="")(PORT=""))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME="")))"
+  username: ""
+  password: ""
+
+

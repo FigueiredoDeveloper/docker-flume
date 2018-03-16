@@ -1,0 +1,64 @@
+table: "umbrella.pedido_aprovacao_pagto"
+
+load_type: "incremental_partitioned"
+
+split_by: "pc.PEDC_ID_PEDIDO"
+
+columns: "select  pap.peap_ped_cliente
+                , pap.peap_seq
+                , pap.peap_cod_retorno
+                , pap.peap_nsu_ctf
+                , pap.peap_nsu_autorizadora
+                , pap.peap_dt_transacao
+                , pap.peap_vl_prestacao
+                , pap.peap_primeiro_vencto
+                , pap.peap_num_contrato
+                , pap.peap_vl_juros
+                , pap.peap_vl_tributo
+                , pap.peap_result_req
+                , pap.peap_situacao
+                , pap.peap_usuario
+                , pap.peap_datahora
+                , pap.peap_id_meio_pagto
+                , pap.peap_vl_pagar
+                , pap.peap_vl_pago
+                , pap.peap_id_cia
+                , pap.peap_id_motivo_reprov
+                , pap.peap_id_cliente_te13
+                , pap.peap_id_autorizacao
+                , pap.peap_id_maquineta
+                , pap.peap_texto_motivo_reprov
+                , pap.peap_num_terminal
+
+                , pap.peap_ped_cliente ||'_'|| pap.peap_seq key_pedido_aprovacao_pagto
+                , pc.pedc_dt_reg as data_inclusao_c
+                , sysdate as data_carga
+                , to_char(pc.pedc_dt_reg,'RRRR-MM') as data_inclusao_p
+        
+        from umbrella.pedido_de_venda_cabecalho  pc
+        , umbrella.pedido_aprovacao_pagto     pap
+        , umbrella.wf_referencia_documental   sr"
+
+where_inc: "where pap.peap_id_cia      = pc.pedc_id_cia
+        and cast(pap.peap_ped_cliente as varchar2 (255)) = cast(pc.pedc_ped_cliente as varchar2 (255))
+and cast(sr.sref_id_cia as varchar2 (255)) = cast(pc.pedc_id_cia as varchar2 (255))
+and cast(sr.sref_id_doc as varchar(255))= cast(pc.pedc_id_pedido as varchar2(255))
+        and sr.sref_tp_refdoc    = 'ENT'
+        and sr.sref_datahora    >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"
+
+where_full: "where pap.peap_id_cia      = pc.pedc_id_cia
+       and cast(pap.peap_ped_cliente as varchar2 (255)) = cast(pc.pedc_ped_cliente as varchar2 (255))
+and cast(sr.sref_id_cia as varchar2 (255)) = cast(pc.pedc_id_cia as varchar2 (255))
+and cast(sr.sref_id_doc as varchar(255))= cast(pc.pedc_id_pedido as varchar2(255))
+        and sr.sref_tp_refdoc    = 'ENT'
+        and $CONDITIONS"
+
+where_range: "where pap.peap_id_cia      = pc.pedc_id_cia
+        and cast(pap.peap_ped_cliente as varchar2 (255)) = cast(pc.pedc_ped_cliente as varchar2 (255))
+and cast(sr.sref_id_cia as varchar2 (255)) = cast(pc.pedc_id_cia as varchar2 (255))
+and cast(sr.sref_id_doc as varchar(255))= cast(pc.pedc_id_pedido as varchar2(255))
+        and sr.sref_tp_refdoc    = 'ENT'
+        and sr.sref_datahora    >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+        and sr.sref_datahora    <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"

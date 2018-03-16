@@ -1,0 +1,71 @@
+# full no Qlik
+
+table: "umbrella.recm_pedido_compra_detalhes"
+
+load_type: "full"
+
+split_by: "pd.pecd_num_ped"
+
+columns: "select pd.pecd_id_cia
+                , pd.pecd_num_ped
+                , pd.pecd_num_item
+                , pd.pecd_id_item
+                , pd.pecd_item_descricao
+                , pd.pecd_id_unimedco
+                , pd.pecd_qt_ped
+                , pd.pecd_num_cot
+                , pd.pecd_seq_cot
+                , pd.pecd_prunit_ori
+                , pd.pecd_prunit_atu
+                , pd.pecd_qt_ent
+                , pd.pecd_dt_entrega
+                , pd.pecd_qt_ent_excesso
+                , pd.pecd_qt_fat_fut
+                , pd.pecd_qt_liq
+                , pd.pecd_qt_can
+                , pd.pecd_situacao
+                , pd.pecd_dt_situacao
+                , pd.pecd_in_aprov
+                , pd.pecd_obs
+                , pd.pecd_id_hora_ag
+                , pd.pecd_id_doca_ag
+                , pd.pecd_id_agenda
+                , pd.pecd_usuario
+                , pd.pecd_datahora
+                , pd.pecd_perc_desconto
+                , pd.pecd_vl_frete
+                , pd.pecd_vl_fin
+                , pd.pecd_vl_seguro
+                , pd.pecd_id_item_kit
+                , pd.pecd_id_natope
+                , pd.pecd_seq_natope
+                , pd.pecd_dt_agendamento
+                , sysdate as data_carga
+
+                from umbrella.RECM_PEDIDO_COMPRA_CABECALHO pc
+                , umbrella.recm_pedido_compra_detalhes pd
+                , umbrella.wf_referencia_documental sr "
+
+where_inc: "where pd.pecd_id_cia    = pc.pecc_id_cia
+   and pd.PECD_NUM_PED   = pc.PECC_NUM_PED
+   and sr.sref_id_cia    = pc.pecc_id_cia
+   and sr.sref_id_doc    = pc.PECC_NUM_PED
+   and sr.sref_tp_refdoc = 'PCO'
+   AND pc.PECC_SITUACAO  = 'A'
+   and $CONDITIONS"
+
+where_full: "where pd.pecd_id_cia    = pc.pecc_id_cia
+   and pd.PECD_NUM_PED   = pc.PECC_NUM_PED
+   and sr.sref_id_cia    = pc.pecc_id_cia
+   and sr.sref_id_doc    = pc.PECC_NUM_PED
+   and sr.sref_tp_refdoc = 'PCO'
+   AND pc.PECC_SITUACAO  = 'A'
+   and $CONDITIONS"
+
+where_range: "where pd.pecd_id_cia    = pc.pecc_id_cia
+   and pd.PECD_NUM_PED   = pc.PECC_NUM_PED
+   and sr.sref_id_cia    = pc.pecc_id_cia
+   and sr.sref_id_doc    = pc.PECC_NUM_PED
+   and sr.sref_tp_refdoc = 'PCO'
+   AND pc.PECC_SITUACAO  = 'A'
+   and $CONDITIONS"

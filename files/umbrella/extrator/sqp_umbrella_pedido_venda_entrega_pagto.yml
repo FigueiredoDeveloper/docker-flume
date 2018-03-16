@@ -1,0 +1,83 @@
+table: "umbrella.pedido_venda_entrega_pagto"
+
+load_type: "incremental_partitioned"
+
+split_by: "pece_id_pedido"
+
+columns: "select pepa_id_cia
+, pepa_id_pedido
+, pepa_seq
+, pepa_id_meio_pagto
+, pepa_vl_meio
+, pepa_dt_entrada
+, pepa_nu_cartao
+, pepa_sit_cod_seguranca
+, pepa_cod_seguranca
+, pepa_titular_cartao
+, pepa_id_bandeira_cartao
+, pepa_dt_vencto_cartao
+, pepa_nu_parcelas
+, pepa_logradouro
+, pepa_compl
+, pepa_bairro
+, pepa_cep
+, pepa_cidade
+, pepa_uf
+, pepa_pais
+, pepa_pe_juros
+, pepa_vl_juros
+, pepa_vl_adicional_bo
+, pepa_dt_vencto_bo
+, pepa_usuario
+, pepa_datahora
+, pepa_ped_cliente
+, pepa_vl_meio_orig
+, pepa_id_vale
+, pepa_tid_vbv
+, pepa_vl_est_dia
+, pepa_cpf_tit_cartao
+, pepa_id_banco
+, pepa_cartao_6digs
+, pepa_id_motivo_reprov
+, pepa_id_agencia
+, pepa_id_conta
+, pepa_vl_juros_adm
+, pepa_pz_vencto
+, pepa_id_bandeira_cliente
+, pepa_nu_cupom
+, pepa_id_cond_pagto
+, pepa_numero
+, pepa_id_vale_ext
+
+, pep.pepa_ped_cliente ||'_'|| pep.pepa_seq key_pedido_venda_entrega_pagto
+, pc.pedc_dt_reg as data_inclusao_c
+, sysdate as data_carga
+, to_char(pc.pedc_dt_reg,'RRRR-MM') as data_inclusao_p
+
+from umbrella.pedido_de_venda_cabecalho  pc
+, umbrella.pedido_venda_entrega_pagto pep
+, umbrella.wf_referencia_documental   sr
+"
+
+where_inc: "where pep.pepa_id_cia      = pc.pedc_id_cia
+and pep.pepa_ped_cliente = pc.pedc_ped_cliente
+and sr.sref_id_cia       = pc.pedc_id_cia
+and sr.sref_id_doc       = pc.pedc_id_pedido
+and sr.sref_tp_refdoc    = 'ENT'
+and sr.sref_datahora >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+and $CONDITIONS"
+
+where_full: "where pep.pepa_id_cia      = pc.pedc_id_cia
+and pep.pepa_ped_cliente = pc.pedc_ped_cliente
+and sr.sref_id_cia       = pc.pedc_id_cia
+and sr.sref_id_doc       = pc.pedc_id_pedido
+and sr.sref_tp_refdoc    = 'ENT'
+and $CONDITIONS"
+
+where_range: "where pep.pepa_id_cia      = pc.pedc_id_cia
+and pep.pepa_ped_cliente = pc.pedc_ped_cliente
+and sr.sref_id_cia       = pc.pedc_id_cia
+and sr.sref_id_doc       = pc.pedc_id_pedido
+and sr.sref_tp_refdoc    = 'ENT'
+and sr.sref_datahora between to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss') and to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+and $CONDITIONS"

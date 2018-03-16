@@ -1,0 +1,23 @@
+# full no Qlik
+
+table: "umbrella.filial_planta"
+
+load_type: "full"
+
+split_by: "fipa_id_filial"
+
+columns: "select fipa_id_cia
+, fipa_id_planta
+, fipa_id_filial
+, fipa_in_confere_unineg
+, fipa_usuario
+, fipa_datahora
+, sysdate as data_carga
+from umbrella.filial_planta"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"
+

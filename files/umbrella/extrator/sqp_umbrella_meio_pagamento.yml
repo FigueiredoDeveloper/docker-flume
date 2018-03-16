@@ -1,0 +1,34 @@
+table: "umbrella.meio_pagamento"
+
+load_type: "full"
+
+split_by: "meip_id_meio_pagto"
+
+columns: "select  meip_id_meio_pagto
+                , meip_nome
+                , meip_tp_meio
+                , meip_in_analise
+                , meip_tp_pagamento
+                , meip_peso
+                , meip_in_atenuador_res
+                , meip_id_modulo
+                , meip_id_documento
+                , meip_id_tran_inc
+                , meip_id_tran_liq
+                , meip_id_tran_can
+                , meip_id_doc_tarifa
+                , meip_in_pagto_ativo
+                , meip_pz_reprov_autom
+                , meip_datahora
+                , meip_usuario
+                , meip_pz_bdv
+                , meip_pz_bdc
+                , meip_in_pagto_b2b
+                , sysdate as data_carga
+        from umbrella.meio_pagamento"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"

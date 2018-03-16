@@ -1,0 +1,60 @@
+table: "umbrella.pedido_de_venda_cabecalho"
+
+load_type: "incremental_partitioned"
+
+split_by: "pece_id_pedido"
+
+columns: "select pece_id_cia
+, pece_id_pedido
+, pece_in_tipo
+, pece_id_terceiro
+, pece_id_tipcli
+, pece_insest
+, pece_nome
+, pece_tel
+, pece_tel1
+, pece_tel2
+, pece_fax
+, pece_email
+, pece_end
+, pece_compl
+, pece_bairro
+, pece_cep
+, pece_zipcode
+, pece_referencia
+, pece_cidade
+, pece_id_estado
+, pece_id_pais
+, pece_id_munici
+, pece_id_clasf_cliente
+, pece_dt_nasc
+, pece_sexo
+, pece_rg
+, pece_id_crt
+, pece_usuario
+, pece_datahora
+, pece_numero
+, pece_id_elo_end
+, pece_id_elo_cli
+
+, c.pece_id_pedido ||'_'|| c.pece_in_tipo key_pedc_cliente
+, pc.pedc_dt_reg as data_inclusao_c
+, sysdate as data_carga
+, to_char(pc.pedc_dt_reg,'RRRR-MM') as data_inclusao_p
+
+from umbrella.pedido_de_venda_cabecalho pc
+, umbrella.pedc_cliente c"
+
+where_inc: "where c.pece_id_cia = pc.pedc_id_cia
+and c.pece_id_pedido = pc.pedc_id_pedido
+and c.pece_datahora >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+and $CONDITIONS"
+
+where_full: "where c.pece_id_cia = pc.pedc_id_cia
+and c.pece_id_pedido = pc.pedc_id_pedido
+and $CONDITIONS"
+
+where_range: "where c.pece_id_cia = pc.pedc_id_cia
+and c.pece_id_pedido = pc.pedc_id_pedido
+and c.pece_datahora between to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss') and to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+and $CONDITIONS"

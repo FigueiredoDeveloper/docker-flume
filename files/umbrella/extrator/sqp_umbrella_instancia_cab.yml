@@ -1,0 +1,35 @@
+table: "umbrella.instancia_cab"
+
+load_type: "incremental_partitioned"
+
+split_by: "inen_id_instancia"
+
+columns: "select  b.inen_id_instancia
+                , b.inen_id_cia
+                , b.inen_id_pedido
+                , b.inen_vl_frete
+                , b.inen_vl_mercadoria
+                , b.inen_vl_pedido
+                , b.inen_vl_desc
+                , b.inen_dh_limite
+                , b.inen_dh_prometida
+
+                , b.inen_id_instancia||'_'||b.inen_id_pedido as key_instancia_cab
+                , a.inst_dh_abertura as data_inclusao_c
+                , sysdate as data_carga
+                , to_char(a.inst_dh_abertura,'RRRR-MM') as data_inclusao_p
+
+        from umbrella.instancia a
+        , umbrella.instancia_cab b"
+
+where_inc: "where a.inst_id_instancia = b.inen_id_instancia
+        and a.inst_dh_ultalt >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"
+
+where_full: "where a.inst_id_instancia = b.inen_id_instancia
+                and $CONDITIONS"
+
+where_range: "where a.inst_id_instancia = b.inen_id_instancia
+        and a.inst_dh_ultalt >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+        and a.inst_dh_ultalt <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"

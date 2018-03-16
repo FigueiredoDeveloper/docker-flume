@@ -1,0 +1,134 @@
+# full no Qlik
+
+table: "umbrella.recm_nr_cabecalho"
+
+load_type: "full"
+
+split_by: "noca_id_nr"
+
+columns: "SELECT  noca_id_cia
+                , noca_id_filial
+                , noca_id_nr
+                , noca_dt_emissao
+                , noca_tp_nota
+                , noca_id_terceiro
+                , noca_num_nota_ref
+                , noca_serie_ref
+                , noca_especie_ref
+                , noca_dt_emissao_ref
+                , noca_dt_saida_ref
+                , noca_id_natope
+                , noca_seq_natope
+                , noca_consumo_sn
+                , noca_id_nr_comp
+                , noca_id_conpag
+                , noca_id_moeda_tit
+                , noca_id_transp
+                , noca_vl_merc
+                , noca_base_icms
+                , noca_vl_icms
+                , noca_vl_icms_sub
+                , noca_vl_icms_dest
+                , noca_base_ipi
+                , noca_vl_ipi
+                , noca_vl_ipi_dest
+                , noca_vl_servico
+                , noca_vl_despesa
+                , noca_vl_desconto
+                , noca_vl_iss
+                , noca_vl_irrf
+                , noca_doc_irrf
+                , noca_perc_inss
+                , noca_base_inss
+                , noca_vl_inss
+                , noca_doc_inss
+                , noca_vl_frete
+                , noca_vl_aces
+                , noca_vl_total
+                , noca_vl_merc_c
+                , noca_base_icms_c
+                , noca_vl_icms_c
+                , noca_vl_icms_sub_c
+                , noca_base_ipi_c
+                , noca_vl_ipi_c
+                , noca_vl_total_c
+                , noca_vl_merc_o
+                , noca_base_icms_o
+                , noca_vl_icms_o
+                , noca_vl_icms_sub_o
+                , noca_base_ipi_o
+                , noca_vl_ipi_o
+                , noca_vl_total_o
+                , noca_peso_bruto
+                , noca_in_contabilizada
+                , noca_id_tipcan
+                , noca_id_preparacao
+                , noca_id_unineg
+                , noca_obs
+                , noca_situacao
+                , noca_dt_situacao
+                , noca_usuario
+                , noca_datahora
+                , noca_id_caminhao
+                , noca_nu_lote
+                , noca_vl_despesa_o
+                , noca_vl_frete_o
+                , noca_vl_aces_o
+                , noca_vl_desconto_o
+                , noca_in_suframa
+                , noca_id_terceiro_rem
+                , noca_num_nota_rem
+                , noca_serie_rem
+                , noca_dt_emissao_rem
+                , noca_in_nominal_forcado
+                , noca_id_nr_rem
+                , noca_in_consig
+                , noca_in_complemento
+                , noca_in_pendente
+                , noca_vl_pis
+                , noca_id_tributo
+                , noca_base_irrf
+                , noca_nu_dependentes
+                , noca_vl_cofins
+                , noca_usuario_registro
+                , noca_datahora_registro
+                , noca_usuario_conferencia
+                , noca_datahora_conferencia
+                , noca_vl_csll
+                , noca_vl_desconto_cond
+                , noca_vl_desconto_inc
+                , noca_base_contr
+                , noca_tp_end
+                , noca_seq_end
+                , noca_perc_inss_enc
+                , noca_vl_inss_enc
+                , noca_vl_pis_cred
+                , noca_vl_cofins_cred
+                , noca_vl_icms_sub_dest
+                , noca_base_ii
+                , noca_vl_ii
+                , noca_vl_desp_aduaneiro
+                , noca_vl_adicional
+                , noca_vl_pis_imp
+                , noca_vl_cofins_imp
+                , noca_vl_cif
+                , noca_in_conf_fisica
+                , noca_fiscal_doc_ext
+                , noca_base_icms_nred_destin
+                , noca_base_icms_destin
+                , noca_vl_icms_destin
+                , noca_vl_icms_part_dest
+                , noca_vl_icms_part_rem
+                , noca_vl_icms_fecp_destin
+                , noca_id_nr || '_' || noca_id_filial || '_' || noca_id_cia as key_id_recm_nr_cabecalho
+                , noca_id_cia || '_' || noca_id_filial || '_' || noca_id_terceiro  || '_' || noca_serie_ref || '_' || noca_num_nota_ref || '_' || noca_dt_emissao_ref as key_recm_nr_cabecalho
+                , sysdate as data_carga
+
+                FROM umbrella.recm_nr_cabecalho"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"
+

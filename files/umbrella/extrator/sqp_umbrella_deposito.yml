@@ -1,0 +1,27 @@
+# full no Qlik
+
+table: "umbrella.deposito"
+
+load_type: "full"
+
+split_by: "depo_id_depos"
+
+columns: "select  depo_id_cia
+, depo_id_filial
+, depo_id_depos
+, depo_nome
+, depo_id_tipdep
+, depo_id_terceiro
+, depo_tp_enderecamento
+, depo_usuario
+, depo_datahora
+, depo_in_coleta
+, sysdate as data_carga
+ from umbrella.deposito"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"
+

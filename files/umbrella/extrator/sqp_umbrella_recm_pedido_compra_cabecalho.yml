@@ -1,0 +1,69 @@
+# full no Qlik
+
+table: "umbrella.RECM_PEDIDO_COMPRA_CABECALHO"
+
+load_type: "full"
+
+split_by: "pecc_num_ped"
+
+columns: "select  pecc_id_cia
+                , pecc_id_filial
+                , pecc_num_ped
+                , pecc_id_fornec
+                , pecc_tp_end
+                , pecc_seq_end
+                , pecc_id_natope
+                , pecc_seq_natope
+                , pecc_id_transp
+                , pecc_id_transpred
+                , pecc_num_ai
+                , pecc_id_moeda
+                , pecc_id_conpag
+                , pecc_vl_saldo
+                , pecc_cif_fob
+                , pecc_tp_atend
+                , pecc_consumosn
+                , pecc_dt_emissao
+                , pecc_num_via
+                , pecc_id_mens
+                , pecc_usuario_aprov
+                , pecc_in_aprov
+                , pecc_dt_aprov
+                , pecc_situacao
+                , pecc_dt_situacao
+                , pecc_usuario
+                , pecc_datahora
+                , pecc_obs
+                , pecc_id_tabpre
+                , pecc_perc
+                , pecc_id_depto
+                , pecc_in_portaria
+                , pecc_dt_portaria
+                , pecc_tp_geracao
+                , pecc_seq_forn
+                , pecc_id_contrato_vpc
+                , pecc_seq_apuracao_vpc
+                , pecc_in_desconto_tab
+                , pecc_vl_frete
+                , pecc_vl_fin
+                , pecc_vl_seguro
+                , pecc_in_liq_aut
+                , pecc_id_depos
+                , pecc_id_fornec_vinc
+                , pecc_tp_end_vinc
+                , pecc_seq_end_vinc
+                , pecc_id_nf
+                , pecc_in_gnre
+                , pecc_id_terceiro_vd
+                , sysdate as data_carga
+        
+        from umbrella.RECM_PEDIDO_COMPRA_CABECALHO"
+
+where_inc: "where PECC_SITUACAO = 'A' 
+                and $CONDITIONS"
+
+where_full: "where PECC_SITUACAO = 'A'
+                and $CONDITIONS"
+
+where_range: "where PECC_SITUACAO = 'A'
+                and $CONDITIONS"

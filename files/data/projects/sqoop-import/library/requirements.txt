@@ -1,0 +1,6 @@
+thrift-sasl==0.1.0
+cx_Oracle
+hdfs
+impyla==0.11.2
+kafka-python
+py4j

@@ -1,0 +1,72 @@
+table: "umbrella.instancia"
+
+split_by: "inst_id_instancia"
+
+load_type: "incremental_partitioned"
+
+columns: "select inst_id_instancia
+, inst_id_filial
+, inst_id_cia
+, inst_ped_cliente
+, inst_dh_abertura
+, inst_id_terceiro_fat
+, inst_id_terceiro_ent
+, inst_email
+, inst_in_nova_entrega
+, inst_in_credito
+, inst_in_vale
+, inst_in_cartao
+, inst_in_especie
+, inst_tp_retorno
+, inst_in_forcado
+, inst_obs
+, inst_id_unineg
+, inst_id_canal
+, inst_id_entrega_raiz
+, inst_id_motivo_fim
+, inst_id_canal_com
+, inst_id_categoria
+, inst_vl_merc
+, inst_vl_frete
+, inst_usuario
+, inst_dh_ultalt
+, inst_situacao
+, inst_id_processo
+, inst_id_motivo
+, inst_in_cheque
+, inst_in_faturado
+, inst_id_transp
+, inst_id_contrato
+, inst_vl_desp_financ_orig
+, inst_vl_desp_aces_orig
+, inst_vl_desp_financ_novo
+, inst_vl_desp_aces_novo
+, inst_vl_total_orig
+, inst_vl_total_novo
+, inst_vl_desc_cond
+, inst_vl_desc_inc
+, inst_vl_merc_novo
+, inst_vl_frete_novo
+, inst_vl_desc_cond_novo
+, inst_vl_desc_inc_novo
+, inst_pz_coleta
+, inst_in_cupom
+, inst_id_nf_orig
+, inst_ped_loja
+, inst_id_rma
+, inst_in_debito
+, inst_dt_registro
+, inst_usuario_registro
+, inst_id_instancia as key_instancia
+, inst_dt_registro as data_inclusao_c
+, sysdate as data_carga
+, to_char(inst_dt_registro, 'rrrr-mm') as data_inclusao_p
+from umbrella.instancia"
+
+where_inc: "where inst_dh_ultalt >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss') and $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where inst_dh_ultalt >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+              and inst_dh_ultalt <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+and $CONDITIONS"

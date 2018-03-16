@@ -1,0 +1,45 @@
+table: "umbrella.wf_rastreamento"
+
+load_type: "incremental_partitioned"
+
+split_by: "rast_id_rastreamento"
+
+columns: "select rast_id_rastreamento
+        , rast_id_fonte
+        , rast_id_ponto
+        , rast_in_manual
+        , rast_dt_rastreamento
+        , rast_dt_prevista
+        , rast_dt_prevista_acum
+        , rast_id_usuario
+        , rast_datahora
+        , rast_id_refdoc
+        , rast_obs
+        , rast_id_fonte_destino
+        , rast_id_ponto_destino
+        , rast_dt_rastr_destino
+        , rast_sit_interface
+        , rast_no_ocorrencia
+        , rast_id_cia
+        , rast_id_unineg
+        , rast_id_transportadora
+        , rast_id_contrato
+        , rast_datahora_tstp
+        , rast_dt_rast_tstp
+
+        , rast_id_rastreamento as key_wf_rastreamento
+        , rast_datahora_tstp as data_inclusao_c
+        , sysdate as data_carga
+        , to_char(rast_datahora_tstp,'RRRR-MM') as data_inclusao_p
+
+        from umbrella.wf_rastreamento
+        "
+
+where_inc: "where rast_datahora_tstp >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where rast_datahora_tstp between to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+        and to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+        and $CONDITIONS"

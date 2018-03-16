@@ -1,0 +1,76 @@
+version: '2'
+
+services:
+  cdh:
+    build:
+      context: .
+      dockerfile: Dockerfile-cdh
+    container_name: cdh
+    expose:
+      # YARN Ports
+      - "8042" # YARN interface
+      - "8088" # YARN interface
+      # HDFS Ports
+#      - "8020"
+      - "9000"
+      - "50010"
+      - "50020"
+  #    - "50070"
+#      - "14000"
+      # Hive Ports (Beeline e Web UI)
+      - "10000"
+    ports:
+      - "21050:21050" # Hue/JDBC/ODBC -> Impala
+      - "25000:25000" # Web impalad -> Impala
+      - "25010:25010" # Web state-store -> Impala
+      - "25020:25020" # Web catalogd -> Impala
+      - "9083:9083"   # Hive -> Thrift
+      - "50070:50070"
+      - "50075:50075"
+      - "8020:8020"
+      - "14000:14000"
+    volumes:
+      - ./files:/files
+      - hdfs-data:/data
+    dns:
+      - 10.13.31.180
+      - 10.13.31.181
+
+    extra_hosts:
+      - "lvdn001-priv.b2w:10.13.9.17"
+      - "lvdn002-priv.b2w:10.13.9.18"
+      - "lvdn003-priv.b2w:10.13.9.19"
+      - "lvdn004-priv.b2w:10.13.9.22"
+      - "lvdn005-priv.b2w:10.13.9.23"
+      - "lvdn006-priv.b2w:10.13.9.24"
+      - "lvdn007-priv.b2w:10.13.9.25"
+      - "lvnn-priv.b2w:10.13.9.20"
+      - "lvsb-priv.b2w:10.13.9.21"
+      - "lvwrk01-priv.b2w:10.13.9.27"
+
+  hue:
+    build:
+      context: .
+      dockerfile: Dockerfile-hue
+    container_name: hue
+    ports:
+      - "8888:8888"
+    volumes:
+      - hue:/hue/desktop/
+    depends_on:
+      - cdh
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  hdfs-data:
+  hue:
+  mysql:

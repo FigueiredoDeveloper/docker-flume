@@ -1,0 +1,152 @@
+table: "umbrella.nota_fiscal_cabecalho"
+
+load_type: "incremental_partitioned"
+
+split_by: "nfca_id_nf"
+
+columns: "select  nfca_id_cia
+                , nfca_id_filial
+                , nfca_num_nota
+                , nfca_serie
+                , nfca_id_natope
+                , nfca_seq_natope
+                , nfca_id_tipope
+                , nfca_dt_emissao
+                , nfca_hr_emissao
+                , nfca_in_es
+                , nfca_dt_es
+                , nfca_hr_es
+                , nfca_in_consumo
+                , nfca_id_cliente_fat
+                , nfca_id_cliente_ent
+                , nfca_id_depos
+                , nfca_id_ped
+                , nfca_id_venrep
+                , nfca_id_venrep2
+                , nfca_id_unineg
+                , nfca_id_conpag
+                , nfca_id_tabpre
+                , nfca_base_icms
+                , nfca_vl_icms
+                , nfca_base_icms_sub
+                , nfca_vl_icms_sub
+                , nfca_vl_icms_dest
+                , nfca_base_icms_sub_nred
+                , nfca_vl_icms_sub_nred
+                , nfca_vl_icms_sub_dest
+                , nfca_vl_icms_suf
+                , nfca_base_ipi
+                , nfca_vl_ipi
+                , nfca_vl_ipi_dest
+                , nfca_vl_mercadoria
+                , nfca_vl_frete
+                , nfca_vl_seguro
+                , nfca_vl_despesa
+                , nfca_vl_ii
+                , nfca_vl_desconto
+                , nfca_vl_total_nota
+                , nfca_id_filial_destino
+                , nfca_id_depos_destino
+                , nfca_cif_fob
+                , nfca_id_transp
+                , nfca_id_transpred
+                , nfca_dt_entrega
+                , nfca_id_veiculo
+                , nfca_id_especie
+                , nfca_ped_cliente
+                , nfca_nu_volumes
+                , nfca_qt_volumes
+                , nfca_peso_bruto
+                , nfca_peso_liquido
+                , nfca_in_geracao
+                , nfca_nu_vias
+                , nfca_dt_situacao
+                , nfca_situacao
+                , nfca_usuario
+                , nfca_vl_servico
+                , nfca_vl_irrf
+                , nfca_vl_iss
+                , nfca_in_contabilizada
+                , nfca_nu_lote
+                , nfca_vl_desp_financ
+                , nfca_perc_tarifa
+                , nfca_vl_tarifa
+                , nfca_cfoc_nome
+                , nfca_id_canal
+                , nfca_vl_pis
+                , nfca_vl_cofins
+                , nfca_vl_csll
+                , nfca_vl_desconto_cond
+                , nfca_vl_desconto_inc
+                , nfca_id_contrato_b2b
+                , nfca_id_filial_saida
+                , nfca_in_envio
+                , nfca_dt_envio
+                , nfca_doc_envio
+                , nfca_id_campanha_b2b
+                , nfca_di
+                , nfca_dt_registro_di
+                , nfca_local_desemb
+                , nfca_id_estado_aduaneiro
+                , nfca_dt_desemb_aduaneiro
+                , nfca_cod_exportador
+                , nfca_cod_fabr_estr
+                , nfca_base_ii
+                , nfca_vl_desp_aduaneiro
+                , nfca_vl_adicional
+                , nfca_vl_pis_imp
+                , nfca_vl_cofins_imp
+                , nfca_vl_cif
+                , nfca_tp_integra_nfe
+                , nfca_tp_fatura
+                , nfca_perc_icms_dest
+                , nfca_id_nf
+                , nfca_id_nf_dup
+                , nfca_id_nf_saida
+                , nfca_id_nf_fatura
+                , nfca_id_nf_remessa
+                , nfca_id_nf_complementada
+                , nfca_id_marca
+                , nfca_id_canal_ext
+                , nfca_usuario_reg
+                , nfca_datahora_reg
+                , nfca_id_motivo_canc
+                , nfca_id_nr
+                , nfca_id_filial_nr
+                , nfca_base_icms_nred_destin
+                , nfca_base_icms_destin
+                , nfca_vl_icms_destin
+                , nfca_vl_icms_part_dest
+                , nfca_vl_icms_part_rem
+                , nfca_vl_icms_fecp_destin
+                , nfca.nfca_id_cia || '_' || nfca.nfca_id_filial || '_' || nfca.nfca_id_cliente_fat || '_' || nfca.nfca_serie  || '_' || nfca.nfca_num_nota || '_' || nfca.nfca_dt_emissao as key_recm_nr_cabecalho
+
+                , nfca.nfca_id_nf || '_' || nfca.nfca_id_filial || '_' || nfca.nfca_id_cia as key_nota_fiscal_cabecalho  
+  	            , nfca_dt_emissao as data_inclusao_c
+                , sysdate as data_carga
+                , to_char(nfca_dt_emissao,'RRRR-MM') as data_inclusao_p
+
+        from umbrella.instancia             inst
+             , umbrella.inst_retorno          inre
+             , umbrella.nota_fiscal_cabecalho nfca"
+
+where_inc: "WHERE nfca_dt_situacao >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS
+and inst.inst_id_instancia = inre.inre_id_instancia
+AND nfca.nfca_id_nf        = inre.inre_id_nf
+AND nfca.nfca_id_filial    = inre.inre_id_filial
+AND nfca.nfca_id_cia       = inre.inre_id_cia"
+
+where_full: "WHERE $CONDITIONS
+and inst.inst_id_instancia = inre.inre_id_instancia
+AND nfca.nfca_id_nf        = inre.inre_id_nf
+AND nfca.nfca_id_filial    = inre.inre_id_filial
+AND nfca.nfca_id_cia       = inre.inre_id_cia"
+
+where_range: "WHERE nfca.nfca_dt_situacao >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+                AND nfca.nfca_dt_situacao <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS
+and inst.inst_id_instancia = inre.inre_id_instancia
+AND nfca.nfca_id_nf        = inre.inre_id_nf
+AND nfca.nfca_id_filial    = inre.inre_id_filial
+AND nfca.nfca_id_cia       = inre.inre_id_cia"

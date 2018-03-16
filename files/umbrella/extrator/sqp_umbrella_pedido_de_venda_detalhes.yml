@@ -1,0 +1,115 @@
+table: "umbrella.pedido_de_venda_detalhes"
+
+load_type: "incremental_partitioned"
+
+split_by: "pedd_id_pedido"
+
+columns: "select  pedd_id_cia
+, pedd_id_pedido
+, pedd_id_item
+, pedd_in_praut
+, pedd_pr_tabela
+, pedd_pr_final
+, pedd_perc_desconto
+, pedd_id_unidade
+, pedd_qt_ped
+, pedd_qt_fat
+, pedd_qt_dev
+, pedd_qt_rom
+, pedd_qt_cancia
+, pedd_qt_cancliente
+, pedd_perc_comissao
+, pedd_perc_comissao2
+, pedd_id_emb
+, pedd_tp_emb
+, pedd_num_unidades
+, pedd_situacao
+, pedd_dt_sit
+, pedd_op_desconto
+, pedd_dt_entrega
+, pedd_pr_calc_tab
+, pedd_pr_calc_ped
+, pedd_qt_saldo_cliente
+, pedd_qt_saldo_aberto
+, pedd_qt_lib
+, pedd_in_aprovado
+, pedd_vl_servico
+, pedd_descr_servico
+, pedd_vl_frete_cliente
+, pedd_vl_frete_cia
+, pedd_qt_garantia
+, pedd_vl_desc_cond_unit
+, pedd_vl_desc_inc_total
+, pedd_cod_tp_variavel
+, pedd_nu_variavel
+, pedd_pz_fornecedor
+, pedd_vl_despesa_aces
+, pedd_vl_despesa_fin
+, pedd_id_estabelec_est
+, pedd_dt_est_terc
+, pedd_id_item_pai
+, pedd_vl_frete_cli_unit
+, pedd_vl_frete_cia_unit
+, pedd_vl_desc_inc_unit
+, pedd_vl_desp_aces_unit
+, pedd_vl_desp_fin_unit
+, pedd_usuario
+, pedd_datahora
+, pedd_tp_combo
+, pedd_id_item_kit
+, pedd_tp_estoque
+, pedd_num_item
+, pedd_id_nf_consol
+, pedd_num_item_nf_consol
+, pedd_id_filial_consol
+, pedd_item_nome
+, pedd_id_customizacao
+, pedd_obs_item
+, pedd_num_item_gar
+, pedd_id_item_gar
+, pedd_ped_cliente_gar
+, pedd_ped_loja_gar
+, pedd_cod_parceiro
+, pedd_perc_icms
+, pedd_base_icms
+, pedd_vl_icms
+, pedd_base_icms_unit
+, pedd_vl_icms_unit
+, pedd_perc_icms_st
+, pedd_base_icms_st
+, pedd_vl_icms_st
+, pedd_base_icms_st_unit
+, pedd_vl_icms_st_unit
+
+, pd.pedd_id_pedido ||'_'|| pd.pedd_num_item key_pedido_de_venda_detalhes
+, pc.pedc_dt_reg as data_inclusao_c
+, sysdate as data_carga
+, to_char(pc.pedc_dt_reg,'RRRR-MM') as data_inclusao_p
+
+from umbrella.pedido_de_venda_cabecalho pc
+, umbrella.pedido_de_venda_detalhes  pd
+, umbrella.wf_referencia_documental  sr"
+
+where_inc: "where pd.pedd_id_cia    = pc.pedc_id_cia
+and pd.pedd_id_pedido = pc.pedc_id_pedido
+and sr.sref_id_cia    = pc.pedc_id_cia
+and sr.sref_id_doc    = pc.pedc_id_pedido
+and sr.sref_tp_refdoc = 'ENT'
+and sr.sref_datahora >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS"
+
+where_full: "where pd.pedd_id_cia    = pc.pedc_id_cia
+and pd.pedd_id_pedido = pc.pedc_id_pedido
+and sr.sref_id_cia    = pc.pedc_id_cia
+and sr.sref_id_doc    = pc.pedc_id_pedido
+and sr.sref_tp_refdoc = 'ENT'
+and $CONDITIONS"
+
+where_range: "where pd.pedd_id_cia    = pc.pedc_id_cia
+and pd.pedd_id_pedido = pc.pedc_id_pedido
+and sr.sref_id_cia    = pc.pedc_id_cia
+and sr.sref_id_doc    = pc.pedc_id_pedido
+and sr.sref_tp_refdoc = 'ENT'
+and sr.sref_datahora >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+and sr.sref_datahora <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+and $CONDITIONS"

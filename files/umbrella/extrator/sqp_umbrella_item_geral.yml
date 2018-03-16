@@ -1,0 +1,107 @@
+table: "umbrella.item_geral"
+
+load_type: "incremental_partitioned"
+
+split_by: "iteg_id"
+
+columns: "select  iteg_id
+                , iteg_id_cia
+                , iteg_id_terceiro
+                , iteg_id_fornec
+                , iteg_cod_terceiro
+                , iteg_cod_fornec
+                , iteg_nome
+                , iteg_nome_alt
+                , iteg_nome_estran
+                , iteg_id_conite
+                , iteg_id_nbm
+                , iteg_seq_nbm
+                , iteg_id_procedencia
+                , iteg_id_unides
+                , iteg_id_unidve
+                , iteg_id_unidco
+                , iteg_fator_ve
+                , iteg_fator_co
+                , iteg_peso_unitario
+                , iteg_peso_bruto
+                , iteg_ean
+                , iteg_tp_lote_serie
+                , iteg_pz_validade
+                , iteg_pz_min_recebto
+                , iteg_pz_min_exped
+                , iteg_pz_alarme_valid
+                , iteg_in_fabric_valid
+                , iteg_tp_embalagem
+                , iteg_qt_sku
+                , iteg_tp_abc
+                , iteg_id_rotativ
+                , iteg_nu_caixas_base
+                , iteg_nu_caixas_alt
+                , iteg_altura
+                , iteg_largura
+                , iteg_comprimento
+                , iteg_in_tombado
+                , iteg_id_depto
+                , iteg_id_setor
+                , iteg_id_familia
+                , iteg_id_sub
+                , iteg_situacao
+                , iteg_datahora
+                , iteg_usuario
+                , iteg_nu_itens
+                , iteg_in_fiscal
+                , iteg_usuario_fiscal
+                , iteg_datahora_fiscal
+                , iteg_obs_fiscal
+                , iteg_observacao
+                , iteg_id_item_geral
+                , iteg_in_envia_loja
+                , iteg_dt_ult_envio
+                , iteg_pz_meses_fabr
+                , iteg_fabricante_cnpj
+                , iteg_fabricante_nome
+                , iteg_fabricante_modelo
+                , iteg_dt_ultcompra
+                , iteg_us_ult_envio
+                , iteg_usuario_inc
+                , iteg_datahora_inc
+                , iteg_pit_id
+                , iteg_dt_lancamento
+                , iteg_qt_grade
+                , iteg_dt_fora_linha
+                , iteg_qt_prevenda
+                , iteg_in_marca_propria
+                , iteg_cod_fabr
+                , iteg_qt_por_emb
+                , iteg_id_tipo_transporte
+                , iteg_in_montagem
+                , iteg_in_medicao_cubometro
+                , iteg_in_nu_serie
+                , iteg_tp_serial
+                , iteg_tam_serial
+                , iteg_qt_empilha
+                , iteg_ajuste_empilha
+                , iteg_tp_item
+                , iteg_id_tp_virtual
+                , iteg_in_vendido_separado
+                , iteg_parent_ext
+                , iteg_in_fci
+                , iteg_id_marca_propria
+                , iteg_cod_embalagem
+                , iteg_cor
+                , iteg_tamanho
+
+                , iteg_id as key_item_geral
+                , iteg_datahora_inc as data_inclusao_c
+                , sysdate as data_carga
+                , to_char(iteg_datahora_inc,'RRRR-MM') as data_inclusao_p
+        from umbrella.item_geral"
+
+where_inc: "where iteg_datahora >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where iteg_datahora >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+                and iteg_datahora <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS"

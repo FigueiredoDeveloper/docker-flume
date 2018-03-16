@@ -1,0 +1,19 @@
+table: "umbrella.tipo_meio_pagto"
+
+split_by: "tmpa_tp_meio_pagto"
+
+load_type: "full"
+
+columns: "select  tmpa_tp_meio_pagto
+                , tmpa_nome
+                , tmpa_situacao
+                , tmpa_usuario
+                , tmpa_dh_ultalt
+                , sysdate as data_carga
+        from umbrella.tipo_meio_pagto t"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"

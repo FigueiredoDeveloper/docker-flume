@@ -1,0 +1,249 @@
+split_by: "nc.noca_id_nr"
+columns: "select rd.node_id_nr ||'_'|| rd.node_num_item 
+                               ||'_'|| rd.node_id_filial 
+                               ||'_'|| rd.node_id_cia         key_nr,
+                 rc.noca_datahora_registro                    data_registro,
+                 rc.noca_id_filial                            filial,
+                 rc.noca_id_nr                                nr,
+                 rc.noca_dt_emissao                           data_emissao,
+                 rc.noca_tp_nota                              tipo_operacao,
+                 tpo.ctop_nome                                operacao,
+                 tc.clie_insest                               ie_fornecedor,
+                 rc.noca_id_terceiro                          cnpj_cpf_fornecedor,
+                 tc.clie_nome                                 razao_social_nome_fornecedor,
+                 rc.noca_num_nota_ref                         nf_ref,
+                 rc.noca_serie_ref                            serie_ref,
+                 rc.noca_dt_emissao_ref                       data_emissao_ref,
+                 rc.noca_id_natope                            cfop_nr,
+                 rc.noca_seq_natope                           cfop_seq_nr,
+                 cfc.cfoc_nome                                cfop_descricao_nr,
+                 bgc.bgmc_modulo_bage                         modulo_gerencial_nr,
+                 rc.noca_id_conpag                            codigo_cond_pagto,
+                 cp.conp_nome                                 condicao_pagamento,
+                 rc.noca_situacao                             situacao,
+                 rd.node_id_item                              sku,
+                 ig.iteg_nome                                 descricao_sku,        
+                 rd.node_id_nbm                               ncm,
+                 rd.node_seq_nbm                              ncm_seq,
+                 rd.node_id_depos                             sub_inventario,
+                 ig.iteg_id_depto                             cod_depto,
+                 dp.depa_nome                                 departamento,
+                 rd.node_qt_uc                                qt_uc,
+                 rd.node_qt_ue                                qt_ue,
+                 rc.noca_vl_total                             valor_total_nf,
+                 rd.node_pr_unit                              preco_unitario,
+                 rd.node_perc_ipi                             perc_ipi,
+                 rd.node_vl_merc                              valor_merc,
+                 rd.node_base_icms                            base_icms,
+                 rd.node_perc_icms                            perc_icms,
+                 rd.node_vl_icms                              valor_icms,
+                 rd.node_vl_icms_sub                          valor_icms_st,
+                 rd.node_vl_icms_dest                         valor_icms_destino,
+                 rd.node_vl_ipi                               valor_ipi,
+                 rd.node_vl_ipi_dest                          valor_ipi_destino,
+                 rd.node_vl_servico                           valor_servico,
+                 rd.node_vl_despesa                           valor_despesa,
+                 rd.node_vl_frete                             valor_frete,
+                 rd.node_vl_desconto                          valor_desconto,
+                 rd.node_vl_aces                              valor_aces,
+                 rd.node_perc_iss                             perc_iss,
+                 rd.node_vl_iss                               valor_iss,
+                 rd.node_perc_irrf                            perc_irrf,
+                 rd.node_vl_irrf                              valor_irrf,
+                 rd.node_qt_uc_c                              qt_uc_c,
+                 rd.node_vl_merc_c                            valor_merc_c,
+                 rd.node_vl_icms_c                            valor_icms_c,
+                 rd.node_vl_icms_sub_c                        valor_icms_st_c,
+                 rd.node_vl_ipi_c                             valor_ipi_c,
+                 rd.node_qt_uc_o                              qt_uc_o,
+                 rd.node_vl_merc_o                            valor_merc_o,
+                 rd.node_vl_icms_o                            valor_icms_o,
+                 rd.node_vl_icms_sub_o                        valor_icms_st_o,
+                 rd.node_vl_ipi_o                             valor_ipi_o,
+                 rd.node_vl_despesa_o                         valor_despesa_o,
+                 rd.node_vl_frete_o                           valor_frete_o,
+                 rd.node_vl_aces_o                            valor_aces_o,
+                 rd.node_vl_desconto_o                        valor_desconto_o,
+                 rd.node_vl_pis                               valor_pis,
+                 rd.node_base_icms_nred                       base_icms_reduzida,
+                 rd.node_vl_icms_merc                         valor_icms_merc,
+                 rd.node_vl_icms_frete                        valor_icms_frete,
+                 rd.node_vl_icms_outros                       valor_icms_outros,
+                 rd.node_vl_cofins                            valor_cofins,
+                 rd.node_vl_cofins_merc                       valor_cofins_merc,
+                 rd.node_vl_cofins_frete                      valor_cofins_frete,
+                 rd.node_vl_cofins_outros                     valor_cofins_outros,
+                 rd.node_vl_pis_merc                          valor_pis_merc,
+                 rd.node_vl_pis_frete                         valor_pis_frete,
+                 rd.node_vl_pis_outros                        valor_pis_outros,
+                 rd.node_perc_pis                             perc_pis,
+                 rd.node_perc_cofins                          perc_cofins,
+                 rd.node_perc_csll                            perc_csll,
+                 rd.node_vl_csll                              valor_cssl,
+                 rd.node_vl_csll_merc                         valor_csll_merc,
+                 rd.node_vl_csll_frete                        valor_csll_frete,
+                 rd.node_vl_csll_outros                       valor_csll_outros,
+                 rd.node_vl_desconto_cond                     valor_desconto_condicional,
+                 rd.node_vl_desconto_inc                      valor_desconto_incondicional,
+                 rd.node_qt_dev_uc                            qt_dev_uc,
+                 rd.node_qt_dev_ue                            qt_dev_ue,
+                 rd.node_qt_dev_ue_fat                        qt_dev_ue_fat,
+                 rd.node_qt_devforn_ue                        qt_devforn_ue,     
+                 rd.node_base_icms_c                          base_icms_c,
+                 rd.node_base_icms_o                          base_icms_o,
+                 rd.node_base_icms_nred_c                     base_icms_reduzida_c,
+                 rd.node_base_icms_nred_o                     base_icms_reduzida_o,
+                 rd.node_base_ipi                             base_ipi,
+                 rd.node_base_ipi_c                           base_ipi_c,
+                 rd.node_base_ipi_o                           base_ipi_o,
+                 rd.node_perc_red_icms                        perc_reducao_icms,
+                 rd.node_vl_total                             valor_total,
+                 rd.node_vl_total_c                           valor_total_c,
+                 rd.node_vl_total_o                           valor_total_o,
+                 rd.node_base_irrf                            base_irrf,
+                 rd.node_vl_inss                              valor_inss,
+                 rd.node_vl_inss_enc                          valor_inss_enc,
+                 rd.node_vl_pis_cred                          valor_pis_cred,
+                 rd.node_vl_cofins_cred                       valor_cofins_cred,
+                 rd.node_vl_icms_sub_dest                     valor_icms_st_destino,
+                 rd.node_base_icms_sub_o                      base_icms_st_o,
+                 rd.node_base_icms_sub                        base_icms_st,
+                 rd.node_base_icms_sub_c                      base_icms_st_c,
+                 rd.node_base_ii                              base_ii,
+                 rd.node_vl_ii                                valor_ii,
+                 rd.node_vl_desp_aduaneiro                    valor_despesa_aduaneira,
+                 rd.node_vl_adicional                         valor_adicional,
+                 rd.node_vl_pis_imp                           valor_pis_imp,
+                 rd.node_vl_cofins_imp                        valor_cofins_imp,
+                 rd.node_vl_cif                               valor_cif,
+                 rd.node_vl_custo                             valor_custo,
+                 rd.node_perc_icms_sub                        perc_icms_st,
+                 rd.node_vl_icms_st_ret                       valor_icms_st_ret,
+                 rd.node_base_icms_st_ret                     base_icms_st_ret,
+                 rd.node_perc_icms_fecp                       perc_icms_fecp,
+                 rd.node_perc_icms_destin                     perc_icms_destin,
+                 rd.node_perc_icms_fecp_destin                perc_icms_fecp_destin,
+                 rd.node_perc_red_icms_destin                 perc_reducao_icms_destin,
+                 rd.node_base_icms_nred_destin                base_icms_reduzida_destin,
+                 rd.node_base_icms_destin                     base_icms_destin,
+                 rd.node_vl_icms_destin                       valor_icms_destin,
+                 rd.node_perc_icms_destin_part                perc_icms_destino_part,
+                 rd.node_vl_icms_part_dest                    valor_icms_part_destino,
+                 rd.node_vl_icms_part_rem                     valor_icms_part_rem,
+                 rd.node_perc_margem_lucro                    perc_margem_lucro,
+                 rd.node_perc_red_icms_sub                    perc_reducao_icms_st,
+                 rd.node_in_pauta_ipi                         ipi_pauta,
+                 rd.node_in_pauta_st                          st_pauta,
+                 rd.node_vl_icms_fecp_destin                  valor_icms_fecp_destin,
+                 rd.node_perc_icms_dest_interna               perc_icms_destino_interna,
+                 rd.node_vl_desp_financ_o                     valor_despesa_financeira_o,
+                 rd.node_perc_st_ret                          perc_st_ret,
+                 rd.node_perc_margem_lucro_ret                perc_margem_lucro_ret,
+                 rd.node_vl_icms_st_ret_forn                  valor_icms_st_ret_fornecedor,
+                 rd.node_base_icms_ret                        base_icms_ret,
+                 rd.node_vl_icms_ret                          valor_icms_ret,
+                 rd.node_perc_icms_ret                        perc_icms_ret,
+                 rd.node_vl_icms_part_dest_merc               valor_icms_part_destino_merc,
+                 rd.node_vl_icms_part_dest_frete              valor_icms_part_destino_frete,
+                 rd.node_vl_icms_part_dest_outros             valor_icms_part_destino_outros,
+                 rd.node_vl_icms_part_rem_merc                valor_icms_part_rem_merc,
+                 rd.node_vl_icms_part_rem_frete               valor_icms_part_rem_frete,
+                 rd.node_vl_icms_part_rem_outros              valor_icms_part_rem_outros,
+                 rd.node_vl_icms_fecp_dest_merc               valor_icms_fecp_destino_merc,
+                 rd.node_vl_icms_fecp_dest_frete              valor_icms_fecp_destino_frete,
+                 rd.node_vl_icms_fecp_dest_outros             valor_icms_fecp_destino_outros,
+                 sysdate                                      data_carga, 
+                 to_char(rc.noca_datahora_registro,'rrrr-mm') data_registro_p
+           from umbrella.recm_nr_cabecalho         rc,
+                umbrella.recm_nr_detalhes          rd,
+                umbrella.cfoc                      cfc,
+                umbrella.base_gerencial_modulo_cfo bgc,
+                umbrella.cfoc                      cfd,
+                umbrella.base_gerencial_modulo_cfo bgd,
+                umbrella.cfo_tipo_operacao         tpo,
+                umbrella.condicoes_de_pagamento    cp,
+                umbrella.item_geral                ig,
+                umbrella.departamento              dp,
+                umbrella.terceiro_cia              tc "
+where_inc:   " where rc.noca_id_cia         = 1
+                 and rc.noca_fiscal_doc_ext is null           
+                 and rc.noca_id_cia         = rd.node_id_cia
+                 and rc.noca_id_nr          = rd.node_id_nr
+                 and rc.noca_id_cia         = cfc.cfoc_id_cia
+                 and rc.noca_id_natope      = cfc.cfoc_id_natope
+                 and rc.noca_seq_natope     = cfc.cfoc_seq
+                 and rc.noca_id_cia         = bgc.bgmc_id_cia
+                 and rc.noca_id_natope      = bgc.bgmc_id_natope
+                 and rc.noca_seq_natope     = bgc.bgmc_seq_natope
+                 and rd.node_id_cia         = cfd.cfoc_id_cia
+                 and rd.node_id_natope      = cfd.cfoc_id_natope
+                 and rd.node_seq_natope     = cfd.cfoc_seq
+                 and rd.node_id_cia         = bgd.bgmc_id_cia
+                 and rd.node_id_natope      = bgd.bgmc_id_natope
+                 and rd.node_seq_natope     = bgd.bgmc_seq_natope
+                 and rc.noca_tp_nota        = tpo.ctop_id_tipope
+                 and rd.node_id_cia         = ig.iteg_id_cia
+                 and rd.node_id_item        = ig.iteg_id               
+                 and ig.iteg_id_depto       = dp.depa_id_depto
+                 and ig.iteg_id_cia         = dp.depa_id_cia
+                 and rc.noca_id_terceiro    = tc.clie_id_terceiro
+                 and rc.noca_id_cia         = tc.clie_id_cia
+                 and rc.noca_id_cia         = cp.conp_id_cia
+                 and rc.noca_id_conpag      = cp.conp_id_conpag
+                 and rc.noca_dt_situacao   >= to_date('$max_data_carga','DD/MM/RRRR hh24:mi:ss')
+                 and $CONDITIONS "
+where_full:  " where rc.noca_id_cia         = 1
+                 and rc.noca_fiscal_doc_ext is null           
+                 and rc.noca_id_cia         = rd.node_id_cia
+                 and rc.noca_id_nr          = rd.node_id_nr
+                 and rc.noca_id_cia         = cfc.cfoc_id_cia
+                 and rc.noca_id_natope      = cfc.cfoc_id_natope
+                 and rc.noca_seq_natope     = cfc.cfoc_seq
+                 and rc.noca_id_cia         = bgc.bgmc_id_cia
+                 and rc.noca_id_natope      = bgc.bgmc_id_natope
+                 and rc.noca_seq_natope     = bgc.bgmc_seq_natope
+                 and rd.node_id_cia         = cfd.cfoc_id_cia
+                 and rd.node_id_natope      = cfd.cfoc_id_natope
+                 and rd.node_seq_natope     = cfd.cfoc_seq
+                 and rd.node_id_cia         = bgd.bgmc_id_cia
+                 and rd.node_id_natope      = bgd.bgmc_id_natope
+                 and rd.node_seq_natope     = bgd.bgmc_seq_natope
+                 and rc.noca_tp_nota        = tpo.ctop_id_tipope
+                 and rd.node_id_cia         = ig.iteg_id_cia
+                 and rd.node_id_item        = ig.iteg_id               
+                 and ig.iteg_id_depto       = dp.depa_id_depto
+                 and ig.iteg_id_cia         = dp.depa_id_cia
+                 and rc.noca_id_terceiro    = tc.clie_id_terceiro
+                 and rc.noca_id_cia         = tc.clie_id_cia
+                 and rc.noca_id_cia         = cp.conp_id_cia
+                 and rc.noca_id_conpag      = cp.conp_id_conpag
+                 and $CONDITIONS "
+where_range: " where rc.noca_id_cia         = 1
+                 and rc.noca_fiscal_doc_ext is null           
+                 and rc.noca_id_cia         = rd.node_id_cia
+                 and rc.noca_id_nr          = rd.node_id_nr
+                 and rc.noca_id_cia         = cfc.cfoc_id_cia
+                 and rc.noca_id_natope      = cfc.cfoc_id_natope
+                 and rc.noca_seq_natope     = cfc.cfoc_seq
+                 and rc.noca_id_cia         = bgc.bgmc_id_cia
+                 and rc.noca_id_natope      = bgc.bgmc_id_natope
+                 and rc.noca_seq_natope     = bgc.bgmc_seq_natope
+                 and rd.node_id_cia         = cfd.cfoc_id_cia
+                 and rd.node_id_natope      = cfd.cfoc_id_natope
+                 and rd.node_seq_natope     = cfd.cfoc_seq
+                 and rd.node_id_cia         = bgd.bgmc_id_cia
+                 and rd.node_id_natope      = bgd.bgmc_id_natope
+                 and rd.node_seq_natope     = bgd.bgmc_seq_natope
+                 and rc.noca_tp_nota        = tpo.ctop_id_tipope
+                 and rd.node_id_cia         = ig.iteg_id_cia
+                 and rd.node_id_item        = ig.iteg_id               
+                 and ig.iteg_id_depto       = dp.depa_id_depto
+                 and ig.iteg_id_cia         = dp.depa_id_cia
+                 and rc.noca_id_terceiro    = tc.clie_id_terceiro
+                 and rc.noca_id_cia         = tc.clie_id_cia
+                 and rc.noca_id_cia         = cp.conp_id_cia
+                 and rc.noca_id_conpag      = cp.conp_id_conpag
+                 and rc.noca_dt_situacao   >= to_date('$data_inicial','DD/MM/RRRR hh24:mi:ss')
+                 and rc.noca_dt_situacao   <= to_date('$data_final','DD/MM/RRRR hh24:mi:ss')                 
+                 and $CONDITIONS "
+

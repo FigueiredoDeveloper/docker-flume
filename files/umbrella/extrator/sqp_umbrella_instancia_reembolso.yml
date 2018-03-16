@@ -1,0 +1,55 @@
+table: "umbrella.instancia_reembolso"
+
+load_type: "incremental_partitioned"
+
+split_by: "insr_id_instancia"
+
+columns: "select  b.insr_id_instancia
+                , b.insr_id_meio_estorno
+                , b.insr_vl_reembolso
+                , b.insr_nu_banco
+                , b.insr_nu_agencia
+                , b.insr_nu_agencia_dv
+                , b.insr_nu_conta
+                , b.insr_nu_conta_dv
+                , b.insr_tp_conta
+                , b.insr_cpf_favorecido
+                , b.insr_nome_favorecido
+                , b.insr_num_cv
+                , b.insr_dt_cv
+                , b.insr_dt_liberacao
+                , b.insr_cliente_cartao
+                , b.insr_id_terceiro_fat
+                , b.insr_nu_estabelecimento
+                , b.insr_vl_juros
+                , b.insr_dt_confirmado
+                , b.insr_id_retorno
+                , b.insr_qt_parcela
+                , b.insr_id_bandeira
+                , b.insr_nu_cartao
+                , b.insr_nu_cartao_6digs
+                , b.insr_sit_cod_seg
+                , b.insr_pz_vencto
+                , b.insr_id_alocacao
+                , b.insr_situacao
+                , b.insr_seq
+
+                , b.insr_id_instancia||'_'||b.insr_seq  as key_instancia_reembolso
+                , a.inst_dh_abertura                    as data_inclusao_c
+                , sysdate                               as data_carga
+                , to_char(a.inst_dh_abertura,'RRRR-MM') as data_inclusao_p
+
+                from umbrella.instancia a
+                , umbrella.instancia_reembolso b"
+
+where_inc: "where a.inst_id_instancia = b.insr_id_instancia
+                and a.inst_dh_ultalt >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS"
+
+where_full: "where a.inst_id_instancia = b.insr_id_instancia
+                and $CONDITIONS"
+
+where_range: "where a.inst_id_instancia = b.insr_id_instancia
+                and a.inst_dh_ultalt >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+                and a.inst_dh_ultalt <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS"

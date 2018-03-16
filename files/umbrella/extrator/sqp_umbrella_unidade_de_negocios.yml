@@ -1,0 +1,22 @@
+table: "umbrella.unidade_de_negocios"
+
+split_by: "unin_id_cia"
+
+load_type: "full"
+
+columns: "select  unin_id_cia
+                , unin_id_unineg
+                , unin_nome
+                , unin_ak
+                , unin_usuario
+                , unin_datahora
+                , unin_in_padrao
+                , sysdate as data_carga
+
+        from umbrella.unidade_de_negocios t"
+
+where_inc: "where $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where $CONDITIONS"

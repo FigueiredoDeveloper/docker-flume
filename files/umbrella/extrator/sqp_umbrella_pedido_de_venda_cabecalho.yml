@@ -1,0 +1,178 @@
+table: "umbrella.pedido_de_venda_cabecalho"
+
+load_type: "incremental_partitioned"
+
+split_by: "pedc_id_pedido"
+
+columns: "select  pedc_id_cia
+, pedc_id_pedido
+, pedc_id_cliente
+, pedc_id_tranred
+, pedc_id_transp
+, pedc_dt_emissao
+, pedc_dt_chegada
+, pedc_dt_reg
+, pedc_id_unineg
+, pedc_ped_cliente
+, pedc_id_venrep
+, pedc_id_venrep2
+, pedc_dt_entrega1
+, pedc_id_filial
+, pedc_dt_entrega2
+, pedc_in_preferencia
+, pedc_in_atendimento
+, pedc_id_tabdes
+, pedc_id_tabpre
+, pedc_dt_conversao
+, pedc_id_conpag
+, pedc_dt_base
+, pedc_parcela_ipi
+, pedc_prazo_medio
+, pedc_in_consumidor
+, pedc_taxa_financ
+, pedc_id_natope
+, pedc_seq
+, pedc_aliqicms
+, pedc_tp_aprocom
+, pedc_dt_aprocom
+, pedc_usuario_com
+, pedc_obs_com
+, pedc_tp_aprocr
+, pedc_dt_aprocr
+, pedc_usuario_cre
+, pedc_obs_cre
+, pedc_fob_cif
+, pedc_id_moeda
+, pedc_vl_pedido_cr
+, pedc_vl_pedido_us
+, pedc_obs_pedido
+, pedc_id_contrato
+, pedc_in_pedido
+, pedc_situacao
+, pedc_dt_sit
+, pedc_in_liber_vl_min_dup
+, pedc_in_acresaut
+, pedc_dt_ultalt
+, pedc_hh_ultalt
+, pedc_usuario
+, pedc_dt_aprocr_prev
+, pedc_id_pedido_ref
+, pedc_dt_prev_entrega1
+, pedc_dt_prev_entrega2
+, pedc_base_desc_cr
+, pedc_nu_mix
+, pedc_obs_nota
+, pedc_perc_desconto_vp
+, pedc_perc_desconto_bf
+, pedc_tp_desconto_det
+, pedc_vl_frete_cliente
+, pedc_id_cliente_ent
+, pedc_id_natope_ent
+, pedc_seq_ent
+, pedc_obs_etiqueta
+, pedc_obs_fiscal
+, pedc_vl_frete_cia
+, pedc_id_canal
+, pedc_op_mkt
+, pedc_in_tracking
+, pedc_vl_desp_financ
+, pedc_id_tippre
+, pedc_num_cv
+, pedc_dt_cv
+, pedc_dt_pag_cli
+, pedc_id_transp_ori
+, pedc_vl_desp_aces
+, pedc_id_modelo
+, pedc_id_pedido_libera
+, pedc_dt_limite_exp
+, pedc_in_vai_wms
+, pedc_in_foi_wms
+, pedc_dt_foi_wms
+, pedc_ddd_agenda
+, pedc_fone_agenda
+, pedc_periodo_agenda
+, pedc_vl_frete_cliente_ori
+, pedc_vl_frete_cia_ori
+, pedc_obs_fiscal_corpo
+, pedc_id_contrato_b2b
+, pedc_id_origem
+, pedc_in_transp_atende
+, pedc_obs_transp_atende
+, pedc_ref_parceiro_b2b
+, pedc_pz_transit
+, pedc_pz_cd
+, pedc_ip_origem
+, pedc_in_aprovado
+, pedc_dt_aprovado
+, pedc_in_vai_pagto
+, pedc_in_foi_pagto
+, pedc_dt_foi_pagto
+, pedc_vl_pedido
+, pedc_id_estabelec_exp
+, pedc_id_pedido_grupo
+, pedc_nu_cupom
+, pedc_vl_frete_tabela
+, pedc_id_tipo_transporte
+, pedc_id_meio_pagto_princ
+, pedc_id_tp_entrega
+, pedc_in_vai_fraude
+, pedc_in_foi_fraude
+, pedc_dt_foi_fraude
+, pedc_in_quebra
+, pedc_id_ponto_orig
+, pedc_in_envia_loja
+, pedc_dt_ult_envio
+, pedc_id_clasf_cliente
+, pedc_utm_source
+, pedc_utm_medium
+, pedc_utm_campaign
+, pedc_dt_entrega_prom
+, pedc_datahora_limite_aprov
+, pedc_dt_min_exped
+, pedc_id_periodo_agenda
+, pedc_id_campanha_b2b
+, pedc_ped_externo
+, pedc_resp_cupom
+, pedc_premio_escolhido
+, pedc_motorista_retira
+, pedc_rg_motorista_retira
+, pedc_transportadora_retira
+, pedc_placa_retira
+, pedc_datahora_retira
+, pedc_id_campanha_cupom
+, pedc_ped_loja
+, pedc_id_nf_libera
+, pedc_id_filial_libera
+, pedc_id_nf_consolidada
+, pedc_id_filial_consolidada
+, pedc_id_lista
+, pedc_id_marca
+, pedc_id_canal_ext
+, pedc_in_pagto_ativo
+, pedc_id_regiao
+, pedc_id_mega_rota
+, pedc_obs_wms
+, pedc_id_estabelec2
+, pedc_cod_loja_retira
+, pedc_tp_lista
+, pedc_b2b_invoice_type
+, pedc_b2b_operation
+, pedc_in_bloqueio_b2b
+, pedc_id_clube
+, pedc_nome_recebedor
+
+, pedc_id_pedido as key_pedido_de_venda_cabecalho
+, pedc_dt_reg as data_inclusao_c
+, sysdate as data_carga
+, to_char(pedc_dt_reg,'RRRR-MM') as data_inclusao_p
+
+from umbrella.pedido_de_venda_cabecalho"
+
+where_inc: "where pedc_dt_ultalt >= to_date('$max_data_carga', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS"
+
+where_full: "where $CONDITIONS"
+
+where_range: "where pedc_dt_ultalt >= to_date('$data_inicial', 'dd/mm/rrrr hh24:mi:ss')
+                and pedc_dt_ultalt <= to_date('$data_final', 'dd/mm/rrrr hh24:mi:ss')
+                and $CONDITIONS"
